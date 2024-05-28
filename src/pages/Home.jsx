@@ -18,7 +18,7 @@ export default function Home() {
       <div>
         <h1 className="text-white mb-4 text-4xl lg:w-1/2 md:text-6xl font-extrabold absolute top-28 lg:top-52 bg-transparent right-0 left-0 p-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
-            Hello, I'm{' '}
+            Hello, I&apos;m{' '}
           </span>{' '}
           <br></br>
           <TypeAnimation

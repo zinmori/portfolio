@@ -14,13 +14,13 @@ export default function About() {
       <div>
         <h1 className="text-2xl font-bold py-4">About Me</h1>
         <p className="text-justify pr-4">
-          Hi, I'm Ezechiel Kokou AGBAN, a junior software developer and data
-          science enthusiast. I'm committed to continuous learning, exploring
-          the latest technologies to expand my skills. With experience in web
-          and mobile development, I'm eager to contribute to innovative projects
-          and grow as a developer. Driven by curiosity and a passion for
-          problem-solving, I'm excited to take on new challenges and make
-          meaningful contributions to the tech industry.
+          Hi, I&apos;m Ezechiel Kokou AGBAN, a junior software developer and
+          data science enthusiast. I&apos;m committed to continuous learning,
+          exploring the latest technologies to expand my skills. With experience
+          in web and mobile development, I&apos;m eager to contribute to
+          innovative projects and grow as a developer. Driven by curiosity and a
+          passion for problem-solving, I&apos;m excited to take on new
+          challenges and make meaningful contributions to the tech industry.
         </p>
       </div>
     </div>
