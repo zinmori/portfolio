@@ -1,8 +1,3 @@
-import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
-import Loader from '../components/Loader';
-import Sky from '../models/Sky';
-import { OrbitControls } from '@react-three/drei';
 import { TypeAnimation } from 'react-type-animation';
 import bg from '../assets/images/bg.png';
 
