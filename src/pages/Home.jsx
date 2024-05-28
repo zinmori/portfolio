@@ -4,10 +4,15 @@ import Loader from '../components/Loader';
 import Sky from '../models/Sky';
 import { OrbitControls } from '@react-three/drei';
 import { TypeAnimation } from 'react-type-animation';
+import bg from '../assets/images/bg.png';
 
 export default function Home() {
   return (
-    <section id="home" className="w-full h-screen relative">
+    <section
+      id="home"
+      className="w-full h-screen relative"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div>
         <img
           src="https://avatars.githubusercontent.com/u/52946467?v=4"
@@ -46,12 +51,6 @@ export default function Home() {
           Download CV
         </button>
       </div>
-      <Canvas className="w-full h-full -z-10 fixed top-0">
-        <Suspense fallback={<Loader />}>
-          <OrbitControls enableZoom={false} />
-          <Sky />
-        </Suspense>
-      </Canvas>
     </section>
   );
 }

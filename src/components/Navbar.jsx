@@ -42,14 +42,12 @@ export default function Navbar() {
         scrollBackground ? 'bg-gray-950' : 'bg-transparent'
       }`}
     >
-      <a className="w-24 h-14 flex justify-center items-center bg-white font-bold rounded-full">
-        <p className="blue-gradient_text text-2xl">
-          <a
-            href="#home"
-            className="bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-blue-700"
-          >
-            BigZ
-          </a>
+      <a
+        href="#home"
+        className="w-24 h-14 flex justify-center items-center bg-white font-bold rounded-full"
+      >
+        <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-blue-700 text-2xl">
+          BigZ
         </p>
       </a>
       {isMobile ? (
