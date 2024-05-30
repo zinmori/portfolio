@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <header
       className={`flex justify-between items-center sm:px-16 px-8 py-4 w-full mx-auto fixed top-0 z-10 right-0 left-0 ${
-        scrollBackground ? 'bg-gray-950' : 'bg-transparent'
+        scrollBackground ? 'bg-slate-950' : 'bg-transparent'
       }`}
     >
       <a

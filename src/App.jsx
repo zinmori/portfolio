@@ -18,11 +18,11 @@ function App() {
     const anchors = document.querySelectorAll('.smooth-scroll');
     anchors.forEach((anchor) => anchor.addEventListener('click', smoothScroll));
 
-    return () => {
+    /* return () => {
       anchors.forEach((anchor) =>
         anchor.removeEventListener('click', smoothScroll),
       );
-    };
+    }; */
   }, []);
 
   return (
