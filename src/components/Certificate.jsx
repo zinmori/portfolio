@@ -8,8 +8,36 @@ const Certificate = ({ image, title, institution, date, link }) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      <img src={image} alt={title} className="w-96 md:w-1/2 rounded-lg" />
-      <div className="flex flex-col">
+      <motion.img
+        src={image}
+        alt={title}
+        className="w-96 md:w-1/2 rounded-lg"
+        initial={{
+          opacity: 0,
+          x: -50,
+        }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+      />
+      <motion.div
+        className="flex flex-col"
+        initial={{
+          opacity: 0,
+          x: 50,
+        }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+      >
         <h2 className="text-2xl font-light mb-2">{title}</h2>
         <p className="text-gray-700 mb-2">{institution}</p>
         <p className="text-gray-500 mb-4">{date}</p>
@@ -21,7 +49,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
         >
           View Certificate
         </a>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

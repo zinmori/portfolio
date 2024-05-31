@@ -77,29 +77,15 @@ const Certifications = () => {
         viewport={{ once: false }}
         className="bg-slate-900 rounded-lg w-[90%] p-4 mt-8 overflow-hidden flex flex-col gap-4"
       >
-        {certificatesData.map((certificate, index) => (
-          <motion.div
+        {certificatesData.map((certificate) => (
+          <Certificate
             key={certificate.title}
-            initial={{
-              opacity: 0,
-              x: index % 2 === 0 ? 200 : -200,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-              transition: {
-                duration: 1,
-              },
-            }}
-          >
-            <Certificate
-              image={certificate.image}
-              title={certificate.title}
-              institution={certificate.institution}
-              date={certificate.date}
-              link={certificate.link}
-            />
-          </motion.div>
+            image={certificate.image}
+            title={certificate.title}
+            institution={certificate.institution}
+            date={certificate.date}
+            link={certificate.link}
+          />
         ))}
       </motion.div>
     </div>
