@@ -20,7 +20,7 @@ const Skills = () => {
       id="skills"
       className="flex flex-col bg-slate-950 text-white items-center justify-center pt-10"
     >
-      <h1 className="text-2xl font font-extrabold py-4">My Skills</h1>
+      <h1 className="text-3xl md:text-4xl font-extralight py-4">My Skills</h1>
       <motion.div
         initial={{
           opacity: 0,
@@ -34,7 +34,7 @@ const Skills = () => {
           },
         }}
         viewport={{ once: false }}
-        className="bg-slate-900 rounded-lg w-[90%] p-4 flex flex-wrap"
+        className="bg-slate-900 rounded-lg w-[90%] p-4 mt-8 flex flex-wrap"
       >
         {skillsData.map((skill) => (
           <Skill

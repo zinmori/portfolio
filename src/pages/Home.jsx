@@ -1,18 +1,14 @@
 import { TypeAnimation } from 'react-type-animation';
-import bg from '../assets/images/bg.png';
+import profilImg from '../assets/images/profil.png';
 
 export default function Home() {
   return (
-    <section
-      id="home"
-      className="w-full h-screen relative"
-      style={{ backgroundImage: `url(${bg})` }}
-    >
+    <section id="home" className="w-full h-screen relative bg-slate-950">
       <div>
         <img
-          src="https://avatars.githubusercontent.com/u/52946467?v=4"
+          src={profilImg}
           alt="My Image"
-          className="w-60 h-60 lg:w-96 lg:h-96 rounded-full object-cover absolute top-[40%] right-0 left-0 lg:left-auto lg:top-36 lg:right-36 mx-auto"
+          className="w-60 h-60 lg:w-96 lg:h-96 rounded-full border-4 border-purple-950 shadow-xl object-cover absolute top-[40%] right-0 left-0 lg:left-auto lg:top-36 lg:right-36 mx-auto"
         />
       </div>
       <div>

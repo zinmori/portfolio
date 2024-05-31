@@ -1,8 +1,13 @@
 import Navbar from './components/Navbar';
-import { Home, About, Projects, Contact } from './pages';
-import Certifications from './pages/Certifications';
-import Education from './pages/Education';
-import Skills from './pages/Skills';
+import {
+  Home,
+  About,
+  Projects,
+  Contact,
+  Skills,
+  Education,
+  Certifications,
+} from './pages';
 import { useEffect } from 'react';
 
 function App() {

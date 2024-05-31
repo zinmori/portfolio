@@ -1,9 +1,31 @@
 import { useEffect, useState } from 'react';
 
+const LINKS = (
+  <>
+    <a href="#about" className="text-white smooth-scroll">
+      About
+    </a>
+    <a href="#skills" className="text-white smooth-scroll">
+      Skills
+    </a>
+    <a href="#certifications" className="text-white smooth-scroll">
+      Certifications
+    </a>
+    <a href="#education" className="text-white smooth-scroll">
+      Education
+    </a>
+    <a href="#projects" className="text-white smooth-scroll">
+      Projects
+    </a>
+    <a href="#contact" className="text-white smooth-scroll">
+      Contact
+    </a>
+  </>
+);
+
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [scrollBackground, setScrollBackground] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -14,21 +36,11 @@ export default function Navbar() {
       }
     };
 
-    const handleScroll = () => {
-      if (window.scrollY > window.innerHeight) {
-        setScrollBackground(true);
-      } else {
-        setScrollBackground(false);
-      }
-    };
-
     handleResize();
     window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -37,11 +49,7 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`flex justify-between items-center sm:px-16 px-8 py-4 w-full mx-auto fixed top-0 z-10 right-0 left-0 ${
-        scrollBackground ? 'bg-slate-950' : 'bg-transparent'
-      }`}
-    >
+    <header className="flex justify-between items-center sm:px-16 px-8 py-4 w-full mx-auto fixed top-0 z-10 right-0 left-0 bg-slate-950">
       <a
         href="#home"
         className="w-24 h-14 flex justify-center items-center bg-white font-bold rounded-full"
@@ -85,47 +93,11 @@ export default function Navbar() {
           )}
         </button>
       ) : (
-        <nav className="text-base font-medium gap-7 flex">
-          <a href="#about" className="text-white smooth-scroll">
-            About
-          </a>
-          <a href="#skills" className="text-white smooth-scroll">
-            Skills
-          </a>
-          <a href="#certifications" className="text-white smooth-scroll">
-            Certifications
-          </a>
-          <a href="#education" className="text-white smooth-scroll">
-            Education
-          </a>
-          <a href="#projects" className="text-white smooth-scroll">
-            Projects
-          </a>
-          <a href="#contact" className="text-white smooth-scroll">
-            Contact
-          </a>
-        </nav>
+        <nav className="text-base font-medium gap-7 flex">{LINKS}</nav>
       )}
       {isMobile && showMenu && (
         <nav className="text-base font-medium gap-7 flex flex-col absolute top-16 right-0 bg-slate-950 py-2 px-4 w-[80%] h-screen">
-          <a href="#about" className="text-white smooth-scroll">
-            About
-          </a>
-          <a href="#skills" className="text-white smooth-scroll">
-            Skills
-          </a>
-          <a href="#certifications" className="text-white smooth-scroll">
-            Certifications
-          </a>
-          <a href="#education" className="text-white smooth-scroll">
-            Education
-          </a>
-          <a href="#projects" className="text-white smooth-scroll">
-            Projects
-          </a>
-          <a href="#contact" className="text-white smooth-scroll">
-            Contact
-          </a>
+          {LINKS}
         </nav>
       )}
     </header>

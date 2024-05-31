@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import Certificate from '../components/Certificate';
 import dataImg from '../assets/images/data.png';
 import flutterImg from '../assets/images/fluttercertificate.jpg';
@@ -30,7 +32,7 @@ const certificatesData = [
   },
   {
     image: flutterImg,
-    title: 'Flutter et Dart',
+    title: 'Flutter & Dart',
     institution: 'Udemy',
     date: 'October 2023',
     link: 'https://www.udemy.com/certificate/UC-18077573-e617-42d6-8b7a-8f2d8d70a0cf/',
@@ -57,19 +59,49 @@ const Certifications = () => {
       id="certifications"
       className="flex flex-col bg-slate-950  text-white items-center justify-center pt-8"
     >
-      <h1 className="text-2xl font-extrabold py-4 my-41">My Certifications</h1>
-      <div className="bg-slate-900 rounded-lg w-[90%] p-4 flex flex-col gap-4">
-        {certificatesData.map((certificate) => (
-          <Certificate
+      <h1 className="text-3xl md:text-4xl font-extralight py-4 my-41">
+        My Certifications
+      </h1>
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 100,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 1,
+          },
+        }}
+        viewport={{ once: false }}
+        className="bg-slate-900 rounded-lg w-[90%] p-4 mt-8 overflow-hidden flex flex-col gap-4"
+      >
+        {certificatesData.map((certificate, index) => (
+          <motion.div
             key={certificate.title}
-            image={certificate.image}
-            title={certificate.title}
-            institution={certificate.institution}
-            date={certificate.date}
-            link={certificate.link}
-          />
+            initial={{
+              opacity: 0,
+              x: index % 2 === 0 ? 200 : -200,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+          >
+            <Certificate
+              image={certificate.image}
+              title={certificate.title}
+              institution={certificate.institution}
+              date={certificate.date}
+              link={certificate.link}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
