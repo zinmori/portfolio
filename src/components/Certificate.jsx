@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
 
 const Certificate = ({ image, title, institution, date, link }) => {
@@ -11,7 +10,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
       <motion.img
         src={image}
         alt={title}
-        className="w-96 md:w-1/2 rounded-lg"
+        className="w-96 md:w-1/3 rounded-lg"
         initial={{
           opacity: 0,
           x: -50,

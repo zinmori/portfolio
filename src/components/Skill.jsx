@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
 import { useAnimation } from 'framer-motion';
 import { useEffect } from 'react';

@@ -12,7 +12,7 @@ export default function About() {
         className="w-full md:w-1/2 h-4/5 object-cover rounded-lg"
       />
       <div>
-        <h1 className="text-2xl font-bold py-4">About Me</h1>
+        <h1 className="text-3xl md:text-4xl font-bold py-4">About Me</h1>
         <p className="text-justify pr-4">
           Hi, I&apos;m Ezechiel Kokou AGBAN, a junior software developer and
           data science enthusiast. I&apos;m committed to continuous learning,
