@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import Tab from '../components/Tab';
 
 import Project from '../components/Project';
@@ -38,7 +38,6 @@ const projectsData = [
   {
     imgUrl: spsImg,
     title: 'Blood bank management web application',
-    projectLink: 'https://sps-z.vercel.app',
     projectCodeLink: 'https://github.com/zinmori/sps_web',
     tag: ['All', 'Web'],
   },
@@ -79,6 +78,8 @@ const projectsData = [
 export default function Projects() {
   const [selectedTab, setSelectedTab] = useState('All');
   const [filteredProjects, setFilteredProjects] = useState(projectsData);
+  const ref = useRef();
+  const isInView = useInView(ref, { once: true });
 
   function filterProjects(tag) {
     setSelectedTab(tag);
@@ -90,7 +91,7 @@ export default function Projects() {
   return (
     <div
       id="projects"
-      className="flex flex-col bg-slate-950 text-white items-center justify-center"
+      className="flex flex-col text-white items-center justify-center"
     >
       <h1 className="text-3xl md:text-4xl font-extralight py-4 my-8">
         My Projects
@@ -117,31 +118,27 @@ export default function Projects() {
           isSelected={selectedTab === 'Mobile'}
         />
       </div>
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 100,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 1,
-          },
-        }}
-        viewport={{ once: false }}
-        className="flex flex-wrap justify-between items-center w-[95%] p-4 rounded-lg"
+
+      <ul
+        ref={ref}
+        className="grid md:grid-cols-3 gap-8 sm:grid-cols-2 md:gap-12 p-6"
       >
-        {filteredProjects.map((project) => (
-          <Project
+        {filteredProjects.map((project, index) => (
+          <motion.li
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ delay: index * 0.4 }}
             key={project.title}
-            imageUrl={project.imgUrl}
-            title={project.title}
-            projectLink={project.projectLink}
-            projectCodeLink={project.projectCodeLink}
-          />
+          >
+            <Project
+              imageUrl={project.imgUrl}
+              title={project.title}
+              projectLink={project.projectLink}
+              projectCodeLink={project.projectCodeLink}
+            />
+          </motion.li>
         ))}
-      </motion.div>
+      </ul>
     </div>
   );
 }

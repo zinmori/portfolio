@@ -18,7 +18,7 @@ const Skills = () => {
   return (
     <div
       id="skills"
-      className="flex flex-col bg-slate-950 text-white items-center justify-center pt-10"
+      className="flex flex-col text-white items-center justify-center pt-10"
     >
       <h1 className="text-3xl md:text-4xl font-extralight py-4">My Skills</h1>
       <motion.div

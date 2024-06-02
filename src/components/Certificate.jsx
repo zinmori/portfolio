@@ -10,7 +10,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
       <motion.img
         src={image}
         alt={title}
-        className="w-96 md:w-1/3 rounded-lg"
+        className="w-96 md:w-2/5 rounded-lg"
         initial={{
           opacity: 0,
           x: -50,
@@ -19,7 +19,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 0.5,
+            duration: 0.3,
           },
         }}
       />
@@ -33,7 +33,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 0.5,
+            duration: 0.3,
           },
         }}
       >

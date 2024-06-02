@@ -49,15 +49,18 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-between items-center sm:px-16 px-8 py-4 w-full mx-auto fixed top-0 z-10 right-0 left-0 bg-slate-950">
-      <a
-        href="#home"
-        className="w-24 h-14 flex justify-center items-center bg-white font-bold rounded-full"
-      >
-        <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-blue-700 text-2xl">
-          BigZ
-        </p>
-      </a>
+    <header className="flex justify-between items-center sm:px-16 px-8 py-4 w-full mx-auto fixed top-0 z-20 right-0 left-0 bg-slate-950">
+      <div className="flex flex-row justify-center items-center">
+        <a
+          href="#home"
+          className="w-24 h-14 flex flex-row justify-center items-center bg-white font-bold rounded-full"
+        >
+          <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-blue-700 text-2xl">
+            BigZ
+          </p>
+        </a>
+        <div id="google_translate_element"></div>
+      </div>
       {isMobile ? (
         <button className="text-white lg:hidden" onClick={handleToggleMenu}>
           {showMenu ? (

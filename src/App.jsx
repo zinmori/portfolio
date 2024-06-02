@@ -1,3 +1,4 @@
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import {
   Home,
@@ -31,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="bg-slate-950">
       <Home />
       <Navbar />
       <About />
@@ -40,7 +41,8 @@ function App() {
       <Education />
       <Projects />
       <Contact />
-    </>
+      <Footer />
+    </div>
   );
 }
 

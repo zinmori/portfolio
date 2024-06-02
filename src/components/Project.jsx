@@ -16,7 +16,7 @@ const Project = ({ title, imageUrl, projectLink, projectCodeLink }) => {
 
   return (
     <div
-      className="relative rounded-lg bg-transparent m-2 w-full md:w-[30%] text-white"
+      className="relative rounded-lg bg-transparent m-2 w-full text-white"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

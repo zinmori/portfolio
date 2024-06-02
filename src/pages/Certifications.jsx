@@ -57,7 +57,7 @@ const Certifications = () => {
   return (
     <div
       id="certifications"
-      className="flex flex-col bg-slate-950  text-white items-center justify-center pt-8"
+      className="flex flex-col  text-white items-center justify-center pt-8"
     >
       <h1 className="text-3xl md:text-4xl font-extralight py-4 my-41">
         My Certifications

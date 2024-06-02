@@ -4,7 +4,7 @@ export default function About() {
   return (
     <div
       id="about"
-      className="flex flex-col md:flex-row items-center space-x-4 bg-slate-950 pt-8 px-4 gap-10 shadow-md text-white"
+      className="flex flex-col md:flex-row items-center space-x-4 pt-8 px-4 gap-10 shadow-md text-white"
     >
       <img
         src={img}
