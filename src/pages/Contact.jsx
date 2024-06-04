@@ -18,6 +18,7 @@ import emailjs from '@emailjs/browser';
 export default function Contact() {
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSucces] = useState('notSend');
+  const [emailIsWrong, setEmailIsWrong] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,9 +29,19 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  function validateEmail(email) {
+    return email.includes('@') && email.includes('.');
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsSending(true);
+    if (!validateEmail(formData.email)) {
+      setEmailIsWrong(true);
+      setIsSending(false);
+      return;
+    }
+    setEmailIsWrong(false);
     emailjs
       .send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
@@ -100,6 +111,9 @@ export default function Contact() {
               value={formData.email}
               onChange={(e) => handleChange(e)}
             />
+            {emailIsWrong ? (
+              <p className="text-red-600 font-semibold">Invalid Email</p>
+            ) : null}
             <label htmlFor="">Your Message</label>
             <textarea
               name="message"
