@@ -45,14 +45,21 @@ export default function Home() {
           <button className="bg-gradient-to-br from-purple-500 to-blue-500 hover:to-black text-white font-bold py-4 px-4 rounded-full">
             <a href="#contact">Contact Me</a>
           </button>
-          <button className="bg-transparent ring-2 text-white hover:bg-blue-900 px-4 py-4 font-bold rounded-full">
+          <a
+            target="_blank"
+            href="https://drive.google.com/file/d/1vpHiDSIufdvEL-3cH_sRHJNosIKYTOjJ/view?usp=sharing"
+            className="bg-transparent ring-2 text-white hover:bg-blue-900 px-4 py-4 font-bold rounded-full"
+          >
             Download CV
-          </button>
+          </a>
         </div>
         <div className="flex flex-row mt-4 text-4xl text-blue-900 gap-4 mb-4 items-center justify-center">
-          <ConnectBtn Icon={FaGithub} link={'https://google.com'} />
-          <ConnectBtn Icon={FaWhatsapp} link={'https://google.com'} />
-          <ConnectBtn Icon={FaLinkedin} link={'https://google.com'} />
+          <ConnectBtn Icon={FaGithub} link={'https://github.com/zinmori'} />
+          <ConnectBtn Icon={FaWhatsapp} link={'https://wa.me/22891355986'} />
+          <ConnectBtn
+            Icon={FaLinkedin}
+            link={'https://www.linkedin.com/in/kokou-ezechiel-agban/'}
+          />
         </div>
       </motion.div>
     </section>

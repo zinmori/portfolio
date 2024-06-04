@@ -38,6 +38,7 @@ const projectsData = [
   {
     imgUrl: spsImg,
     title: 'Blood bank management web application',
+    projectLink: 'https://sps-z.vercel.app',
     projectCodeLink: 'https://github.com/zinmori/sps_web',
     tag: ['All', 'Web'],
   },
