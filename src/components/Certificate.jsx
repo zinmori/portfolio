@@ -19,7 +19,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 0.3,
+            duration: 1,
           },
         }}
       />
@@ -33,7 +33,7 @@ const Certificate = ({ image, title, institution, date, link }) => {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 0.3,
+            duration: 1,
           },
         }}
       >
