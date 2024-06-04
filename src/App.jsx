@@ -10,6 +10,7 @@ import {
   Certifications,
 } from './pages';
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function App() {
       <Projects />
       <Contact />
       <Footer />
+      <Analytics />
     </div>
   );
 }
