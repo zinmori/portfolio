@@ -19,6 +19,8 @@ export default function Contact() {
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSucces] = useState('notSend');
   const [emailIsWrong, setEmailIsWrong] = useState(false);
+  const [messageIsWrong, setMessageIsWrong] = useState(false);
+  const [nameIsWrong, setNameIsWrong] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,16 +34,34 @@ export default function Contact() {
   function validateEmail(email) {
     return email.includes('@') && email.includes('.');
   }
+  function validateMessage(message) {
+    return message.length > 0;
+  }
+  function validateName(name) {
+    return name.length > 2;
+  }
+
+  function validateInputs() {
+    setEmailIsWrong(!validateEmail(formData.email));
+    setMessageIsWrong(!validateMessage(formData.message));
+    setNameIsWrong(!validateName(formData.name));
+    return (
+      validateEmail(formData.email) &&
+      validateMessage(formData.message) &&
+      validateName(formData.name)
+    );
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsSending(true);
-    if (!validateEmail(formData.email)) {
-      setEmailIsWrong(true);
+    if (!validateInputs()) {
       setIsSending(false);
       return;
     }
     setEmailIsWrong(false);
+    setMessageIsWrong(false);
+    setNameIsWrong(false);
     emailjs
       .send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
@@ -101,6 +121,9 @@ export default function Contact() {
               value={formData.name}
               onChange={(e) => handleChange(e)}
             />
+            {nameIsWrong && (
+              <p className="text-red-600 font-semibold">Invalid Name</p>
+            )}
             <label htmlFor="">Email</label>
             <input
               type="email"
@@ -111,9 +134,9 @@ export default function Contact() {
               value={formData.email}
               onChange={(e) => handleChange(e)}
             />
-            {emailIsWrong ? (
+            {emailIsWrong && (
               <p className="text-red-600 font-semibold">Invalid Email</p>
-            ) : null}
+            )}
             <label htmlFor="">Your Message</label>
             <textarea
               name="message"
@@ -124,6 +147,9 @@ export default function Contact() {
               value={formData.message}
               onChange={(e) => handleChange(e)}
             ></textarea>
+            {messageIsWrong && (
+              <p className="text-red-600 font-semibold">Invalid Message</p>
+            )}
             <div className="flex flex-col md:flex-row items-center justify-start gap-4">
               <button
                 className="bg-slate-950 rounded-md px-4 py-2 text-white md:w-44"
