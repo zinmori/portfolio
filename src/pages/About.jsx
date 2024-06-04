@@ -1,4 +1,4 @@
-import img from '../assets/images/hero.jpg';
+import img from '../assets/images/hero.webp';
 
 export default function About() {
   return (

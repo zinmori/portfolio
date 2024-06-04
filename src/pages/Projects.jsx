@@ -5,7 +5,7 @@ import Tab from '../components/Tab';
 import Project from '../components/Project';
 import gplayImg from '../assets/images/gplay.png';
 import co2Img from '../assets/images/co2Afr.png';
-import creditCardImg from '../assets/images/creditCard.jpg';
+import creditCardImg from '../assets/images/creditCard.webp';
 import spsImg from '../assets/images/sps.png';
 import foodImg from '../assets/images/food.png';
 import termImg from '../assets/images/term.png';
