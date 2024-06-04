@@ -1,28 +1,5 @@
 import { useEffect, useState } from 'react';
 
-const LINKS = (
-  <>
-    <a href="#about" className="text-white smooth-scroll">
-      About
-    </a>
-    <a href="#skills" className="text-white smooth-scroll">
-      Skills
-    </a>
-    <a href="#certifications" className="text-white smooth-scroll">
-      Certifications
-    </a>
-    <a href="#education" className="text-white smooth-scroll">
-      Education
-    </a>
-    <a href="#projects" className="text-white smooth-scroll">
-      Projects
-    </a>
-    <a href="#contact" className="text-white smooth-scroll">
-      Contact
-    </a>
-  </>
-);
-
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -47,7 +24,52 @@ export default function Navbar() {
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
   };
-
+  const LINKS = (
+    <>
+      <a
+        onClick={handleToggleMenu}
+        href="#about"
+        className="text-white smooth-scroll"
+      >
+        About
+      </a>
+      <a
+        onClick={handleToggleMenu}
+        href="#skills"
+        className="text-white smooth-scroll"
+      >
+        Skills
+      </a>
+      <a
+        onClick={handleToggleMenu}
+        href="#certifications"
+        className="text-white smooth-scroll"
+      >
+        Certifications
+      </a>
+      <a
+        onClick={handleToggleMenu}
+        href="#education"
+        className="text-white smooth-scroll"
+      >
+        Education
+      </a>
+      <a
+        onClick={handleToggleMenu}
+        href="#projects"
+        className="text-white smooth-scroll"
+      >
+        Projects
+      </a>
+      <a
+        onClick={handleToggleMenu}
+        href="#contact"
+        className="text-white smooth-scroll"
+      >
+        Contact
+      </a>
+    </>
+  );
   return (
     <header className="flex justify-between items-center sm:px-16 px-8 py-4 w-full mx-auto fixed top-0 z-20 right-0 left-0 bg-slate-950">
       <div className="flex flex-row justify-center items-center">
