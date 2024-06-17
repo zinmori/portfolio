@@ -34,7 +34,7 @@ const Education = () => {
           <p className="mb-4">2021 - 2024</p>
         </div>
         <div className="rounded-lg shadow-lg p-6 w-full">
-          <h2 className="text-2xl font-bold mb-2">Scientific Baccalaureate</h2>
+          <h2 className="text-2xl font-bold mb-2">High School Diploma</h2>
           <p className="font-semibold">Lycée Scientifique de Lomé</p>
           <p className="mb-4">2018 - 2021</p>
           <p>Specialty: Mathematics and Physics</p>
