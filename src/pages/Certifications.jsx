@@ -5,8 +5,7 @@ import dataImg from '../assets/images/data.png';
 import flutterImg from '../assets/images/fluttercertificate.jpg';
 import reactImg from '../assets/images/react.png';
 import nodeImg from '../assets/images/node.png';
-import mlImg from '../assets/images/ml.png';
-import advmlImg from '../assets/images/advml.png';
+import mlImg from '../assets/images/mlspe.png';
 
 const certificatesData = [
   {
@@ -18,17 +17,10 @@ const certificatesData = [
   },
   {
     image: mlImg,
-    title: 'Supervised Machine Learning',
+    title: 'Machine Learning Specialization',
     institution: 'Coursera',
     date: 'April 2024',
-    link: 'https://coursera.org/verify/SF24JFHH5H5Q',
-  },
-  {
-    image: advmlImg,
-    title: 'Advanded Learning Algorithms',
-    institution: 'Coursera',
-    date: 'May 2024',
-    link: 'https://coursera.org/verify/PNK3EEPQSR4S',
+    link: 'https://coursera.org/verify/specialization/2RUCU48RMPBY',
   },
   {
     image: flutterImg,
@@ -60,7 +52,7 @@ const Certifications = () => {
       className="flex flex-col  text-white items-center justify-center pt-8"
     >
       <h1 className="text-3xl md:text-4xl font-extralight py-4 my-41">
-        My Certifications
+        My Achievements and Certifications
       </h1>
       <motion.div
         initial={{
