@@ -1,5 +1,11 @@
-import Footer from './components/Footer';
+import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+// import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import ParticleBackground from './components/ParticleBackground';
+import Loader from './components/Loader';
 import {
   Home,
   About,
@@ -7,43 +13,80 @@ import {
   Contact,
   Skills,
   Education,
+  Experience,
   Certifications,
 } from './pages';
-import { useEffect } from 'react';
-import { Analytics } from '@vercel/analytics/react';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
     const smoothScroll = (e) => {
       e.preventDefault();
       const targetId = e.currentTarget.getAttribute('href');
-      document.querySelector(targetId).scrollIntoView({
-        behavior: 'smooth',
-      });
+      const target = document.querySelector(targetId);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
     };
 
     const anchors = document.querySelectorAll('.smooth-scroll');
     anchors.forEach((anchor) => anchor.addEventListener('click', smoothScroll));
 
-    /* return () => {
+    return () => {
+      clearTimeout(timer);
       anchors.forEach((anchor) =>
         anchor.removeEventListener('click', smoothScroll),
       );
-    }; */
+    };
   }, []);
 
   return (
-    <div className="bg-slate-950">
-      <Home />
-      <Navbar />
-      <About />
-      <Skills />
-      <Certifications />
-      <Education />
-      <Projects />
-      <Contact />
-      <Footer />
-      <Analytics />
+    <div className="relative min-h-screen bg-gradient-dark overflow-x-hidden">
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <Loader key="loader" />
+        ) : (
+          <motion.div
+            key="main-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Particle background */}
+            <ParticleBackground />
+
+            {/* Navigation */}
+            <Navbar />
+
+            {/* Main content */}
+            <main className="relative z-20">
+              <Home />
+              <About />
+              <Skills />
+              <Experience />
+              <Certifications />
+              <Education />
+              <Projects />
+              <Contact />
+            </main>
+
+            {/* Footer */}
+            {/* <Footer /> */}
+
+            {/* Analytics */}
+            <Analytics />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

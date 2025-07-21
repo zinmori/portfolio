@@ -1,23 +1,25 @@
 import { useState } from 'react';
-import Loader from '../components/Loader';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import emailjs from '@emailjs/browser';
 import {
   FaGithub,
   FaLinkedin,
   FaWhatsapp,
   FaPhone,
   FaEnvelope,
-  FaHome,
+  FaMapMarkerAlt,
   FaCheckCircle,
+  FaPaperPlane,
+  FaUser,
+  FaComments,
 } from 'react-icons/fa';
 import { VscError } from 'react-icons/vsc';
 import ConnectBtn from '../components/ConnectBtn';
-import Info from '../components/Info';
-import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [isSending, setIsSending] = useState(false);
-  const [isSuccess, setIsSucces] = useState('notSend');
+  const [isSuccess, setIsSuccess] = useState('notSend');
   const [emailIsWrong, setEmailIsWrong] = useState(false);
   const [messageIsWrong, setMessageIsWrong] = useState(false);
   const [nameIsWrong, setNameIsWrong] = useState(false);
@@ -27,8 +29,17 @@ export default function Contact() {
     message: '',
   });
 
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Reset error states when user starts typing
+    if (e.target.name === 'email') setEmailIsWrong(false);
+    if (e.target.name === 'message') setMessageIsWrong(false);
+    if (e.target.name === 'name') setNameIsWrong(false);
   }
 
   function validateEmail(email) {
@@ -68,7 +79,7 @@ export default function Contact() {
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
           from_name: formData.name,
-          to_name: 'BigZ',
+          to_name: 'Ezechiel',
           from_email: formData.email,
           to_email: 'ezechielagban1@gmail.com',
           message: formData.message,
@@ -77,123 +88,465 @@ export default function Contact() {
       )
       .then(() => {
         setFormData({ name: '', email: '', message: '' });
-        setIsSucces('yes');
+        setIsSuccess('yes');
+        setTimeout(() => setIsSuccess('notSend'), 5000);
       })
       .catch((error) => {
-        setIsSucces('no');
+        setIsSuccess('no');
         console.log(error);
+        setTimeout(() => setIsSuccess('notSend'), 5000);
       })
       .finally(() => {
         setIsSending(false);
       });
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const contactInfo = [
+    {
+      icon: FaPhone,
+      label: 'Phone',
+      value: '+228 91 35 59 86',
+      href: 'tel:+22891355986',
+      color: '#4ECDC4',
+    },
+    {
+      icon: FaEnvelope,
+      label: 'Email',
+      value: 'ezechielagban1@gmail.com',
+      href: 'mailto:ezechielagban1@gmail.com',
+      color: '#FF6B6B',
+    },
+    {
+      icon: FaMapMarkerAlt,
+      label: 'Location',
+      value: 'Lomé, Togo',
+      href: 'https://maps.google.com/?q=Lome,Togo',
+      color: '#45B7D1',
+    },
+  ];
+
   return (
-    <div
+    <section
       id="contact"
-      className="rounded-lg text-slate-950 items-center w-full flex justify-center mt-32"
+      className="section-padding bg-dark-950/5 relative overflow-hidden"
     >
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 -left-40 w-80 h-80 bg-primary-500/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 -right-40 w-96 h-96 bg-secondary-500/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1.4, 1, 1.4],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      </div>
+
       <motion.div
-        initial={{
-          opacity: 0,
-          y: 100,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 1,
-          },
-        }}
-        viewport={{ once: false }}
-        className="w-full m-2 md:w-4/5 bg-slate-100 rounded-lg flex flex-col items-center justify-center"
+        ref={ref}
+        variants={containerVariants}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        className="section-container relative z-10"
       >
-        <p className="text-3xl font-bold mt-4">Conctact me</p>
-        <div className="flex flex-col md:flex-row w-full items-center justify-center">
-          <form className="flex flex-col w-full md:w-2/3 p-8 gap-4 my-4">
-            <label htmlFor="">Name</label>
-            <input
-              type="text"
-              placeholder="John Doe"
-              className="ring-2 ring-slate-950 rounded-md px-4 py-2"
-              name="name"
-              id="name"
-              value={formData.name}
-              onChange={(e) => handleChange(e)}
-            />
-            {nameIsWrong && (
-              <p className="text-red-600 font-semibold">Invalid Name</p>
-            )}
-            <label htmlFor="">Email</label>
-            <input
-              type="email"
-              placeholder="john@gmail.com"
-              className="ring-2 ring-slate-950 rounded-md px-4 py-2"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={(e) => handleChange(e)}
-            />
-            {emailIsWrong && (
-              <p className="text-red-600 font-semibold">Invalid Email</p>
-            )}
-            <label htmlFor="">Your Message</label>
-            <textarea
-              name="message"
-              placeholder="Hi..."
-              rows={8}
-              className="ring-2 ring-slate-950 rounded-md px-4 py-2"
-              id="message"
-              value={formData.message}
-              onChange={(e) => handleChange(e)}
-            ></textarea>
-            {messageIsWrong && (
-              <p className="text-red-600 font-semibold">Invalid Message</p>
-            )}
-            <div className="flex flex-col md:flex-row items-center justify-start gap-4">
-              <button
-                className="bg-slate-950 rounded-md px-4 py-2 text-white md:w-44"
-                onClick={handleSubmit}
-              >
-                {isSending ? <Loader /> : 'Send Message'}
-              </button>
-              {isSuccess !== 'notSend' ? (
-                isSuccess === 'yes' ? (
-                  <p className="text-green-500 font-semibold  flex flex-row items-center gap-1">
-                    <FaCheckCircle />
-                    Message sent succesfully !
-                  </p>
-                ) : (
-                  <p className="text-red-600 font-semibold flex flex-row items-center gap-1">
-                    {' '}
-                    <VscError />
-                    An error occured !
-                  </p>
-                )
-              ) : null}
+        {/* Section header */}
+        <motion.div className="text-center mb-16" variants={itemVariants}>
+          {/* <motion.p
+            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
+            variants={itemVariants}
+          >
+            &lt;get_in_touch&gt;
+          </motion.p> */}
+
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
+            variants={itemVariants}
+          >
+            Let&apos;s Create <span className="text-gradient">Together</span>
+          </motion.h2>
+
+          <motion.p
+            className="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed"
+            variants={itemVariants}
+          >
+            Have a project in mind? I&apos;d love to hear about it. Let&apos;s
+            discuss how we can bring your ideas to life.
+          </motion.p>
+
+          {/* <motion.p
+            className="text-primary-400 font-mono mt-4"
+            variants={itemVariants}
+          >
+            &lt;/get_in_touch&gt;
+          </motion.p> */}
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Contact Form */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <motion.div
+              className="glass-effect rounded-2xl p-8 border border-white/10"
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h3 className="text-2xl font-display font-bold text-white mb-6 flex items-center space-x-3">
+                <FaPaperPlane className="text-primary-400" />
+                <span>Send me a message</span>
+              </h3>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Field */}
+                <motion.div
+                  className="space-y-2"
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <label
+                    htmlFor="name"
+                    className="block text-white font-medium flex items-center space-x-2"
+                  >
+                    <FaUser className="text-primary-400 text-sm" />
+                    <span>Full Name</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="John Doe"
+                      className={`w-full bg-dark-700/50 border ${
+                        nameIsWrong ? 'border-red-500' : 'border-white/20'
+                      } rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300`}
+                    />
+                    {nameIsWrong && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute right-3 top-3"
+                      >
+                        <VscError className="text-red-500" />
+                      </motion.div>
+                    )}
+                  </div>
+                  {nameIsWrong && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-400 text-sm font-medium"
+                    >
+                      Please enter a valid name (min 3 characters)
+                    </motion.p>
+                  )}
+                </motion.div>
+
+                {/* Email Field */}
+                <motion.div
+                  className="space-y-2"
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <label
+                    htmlFor="email"
+                    className="block text-white font-medium flex items-center space-x-2"
+                  >
+                    <FaEnvelope className="text-primary-400 text-sm" />
+                    <span>Email Address</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                      className={`w-full bg-dark-700/50 border ${
+                        emailIsWrong ? 'border-red-500' : 'border-white/20'
+                      } rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300`}
+                    />
+                    {emailIsWrong && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute right-3 top-3"
+                      >
+                        <VscError className="text-red-500" />
+                      </motion.div>
+                    )}
+                  </div>
+                  {emailIsWrong && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-400 text-sm font-medium"
+                    >
+                      Please enter a valid email address
+                    </motion.p>
+                  )}
+                </motion.div>
+
+                {/* Message Field */}
+                <motion.div
+                  className="space-y-2"
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <label
+                    htmlFor="message"
+                    className="block text-white font-medium flex items-center space-x-2"
+                  >
+                    <FaComments className="text-primary-400 text-sm" />
+                    <span>Message</span>
+                  </label>
+                  <div className="relative">
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell me about your project..."
+                      rows={6}
+                      className={`w-full bg-dark-700/50 border ${
+                        messageIsWrong ? 'border-red-500' : 'border-white/20'
+                      } rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all duration-300 resize-none`}
+                    />
+                    {messageIsWrong && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute right-3 top-3"
+                      >
+                        <VscError className="text-red-500" />
+                      </motion.div>
+                    )}
+                  </div>
+                  {messageIsWrong && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-400 text-sm font-medium"
+                    >
+                      Please enter a message
+                    </motion.p>
+                  )}
+                </motion.div>
+
+                {/* Submit Button */}
+                <motion.button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full btn-primary relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                  whileHover={{ scale: isSending ? 1 : 1.02 }}
+                  whileTap={{ scale: isSending ? 1 : 0.98 }}
+                >
+                  <motion.div
+                    className="flex items-center justify-center space-x-2"
+                    animate={isSending ? { x: [0, 5, 0] } : {}}
+                    transition={{
+                      duration: 0.5,
+                      repeat: isSending ? Infinity : 0,
+                    }}
+                  >
+                    {isSending ? (
+                      <>
+                        <motion.div
+                          className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                          animate={{ rotate: 360 }}
+                          transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            ease: 'linear',
+                          }}
+                        />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <FaPaperPlane />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </motion.div>
+                </motion.button>
+
+                {/* Success/Error Messages */}
+                {isSuccess !== 'notSend' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex items-center space-x-2 p-4 rounded-xl ${
+                      isSuccess === 'yes'
+                        ? 'bg-green-500/20 border border-green-500/30 text-green-400'
+                        : 'bg-red-500/20 border border-red-500/30 text-red-400'
+                    }`}
+                  >
+                    {isSuccess === 'yes' ? (
+                      <>
+                        <FaCheckCircle />
+                        <span className="font-medium">
+                          Message sent successfully! I&apos;ll get back to you
+                          soon.
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <VscError />
+                        <span className="font-medium">
+                          An error occurred. Please try again later.
+                        </span>
+                      </>
+                    )}
+                  </motion.div>
+                )}
+              </form>
+            </motion.div>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            {/* Contact Cards */}
+            <div className="space-y-6">
+              {contactInfo.map((info) => (
+                <motion.a
+                  key={info.label}
+                  href={info.href}
+                  target={info.href.startsWith('http') ? '_blank' : undefined}
+                  rel={
+                    info.href.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  className="block group"
+                  whileHover={{ x: 10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="glass-effect rounded-xl p-6 border border-white/10 card-hover">
+                    <div className="flex items-center space-x-4">
+                      <motion.div
+                        className="p-3 rounded-full"
+                        style={{ backgroundColor: `${info.color}20` }}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <info.icon
+                          className="text-xl"
+                          style={{ color: info.color }}
+                        />
+                      </motion.div>
+                      <div>
+                        <p className="text-gray-400 text-sm font-medium mb-1">
+                          {info.label}
+                        </p>
+                        <p className="text-white font-semibold group-hover:text-primary-400 transition-colors">
+                          {info.value}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
             </div>
-          </form>
-          <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
-            <div className="flex items-start justify-center flex-col gap-4 mb-14 pb-8 border-b border-slate-950">
-              <Info Icon={FaPhone} value={'+228 91 35 59 86'} />
-              <Info Icon={FaEnvelope} value={'ezechielagban1@gmail.com'} />
-              <Info Icon={FaHome} value={'Lomé, Togo'} />
-            </div>
-            <p className="text-2xl font-semibold">Let&apos;s Connect</p>
-            <div className="flex flex-row mt-4 text-xl gap-2 mb-4">
-              <ConnectBtn Icon={FaGithub} link={'https://github.com/zinmori'} />
-              <ConnectBtn
-                Icon={FaWhatsapp}
-                link={'https://wa.me/22891355986'}
-              />
-              <ConnectBtn
-                Icon={FaLinkedin}
-                link={'https://www.linkedin.com/in/kokou-ezechiel-agban/'}
-              />
-            </div>
-          </div>
+
+            {/* Social Links */}
+            <motion.div
+              className="glass-effect rounded-xl p-6 border border-white/10"
+              variants={itemVariants}
+            >
+              <h3 className="text-xl font-display font-bold text-white mb-6">
+                Connect with me
+              </h3>
+              <div className="flex space-x-4">
+                <ConnectBtn
+                  Icon={FaGithub}
+                  link={'https://github.com/zinmori'}
+                />
+                <ConnectBtn
+                  Icon={FaLinkedin}
+                  link={'https://www.linkedin.com/in/kokou-ezechiel-agban/'}
+                />
+                <ConnectBtn
+                  Icon={FaWhatsapp}
+                  link={'https://wa.me/22891355986'}
+                />
+              </div>
+              <p className="text-gray-400 text-sm mt-4 leading-relaxed">
+                Follow my journey and connect with me on social media. I love
+                sharing insights about technology and development.
+              </p>
+            </motion.div>
+
+            {/* Availability Status */}
+            {/* <motion.div
+              className="glass-effect rounded-xl p-6 border border-white/10"
+              variants={itemVariants}
+            >
+              <div className="flex items-center space-x-3 mb-4">
+                <motion.div
+                  className="w-3 h-3 bg-green-500 rounded-full"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [1, 0.7, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <span className="text-white font-semibold">
+                  Available for work
+                </span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                I&apos;m currently available for freelance projects and
+                full-time opportunities. Let&apos;s build something amazing
+                together!
+              </p>
+            </motion.div> */}
+          </motion.div>
         </div>
       </motion.div>
-    </div>
+    </section>
   );
 }
