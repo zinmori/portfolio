@@ -130,29 +130,29 @@ export default function Contact() {
       label: 'Phone',
       value: '+228 91 35 59 86',
       href: 'tel:+22891355986',
-      color: '#4ECDC4',
+      color: '#06b6d4',
     },
     {
       icon: FaEnvelope,
       label: 'Email',
       value: 'ezechielagban1@gmail.com',
       href: 'mailto:ezechielagban1@gmail.com',
-      color: '#FF6B6B',
+      color: '#0891b2',
     },
     {
       icon: FaMapMarkerAlt,
       label: 'Location',
       value: 'Lomé, Togo',
       href: 'https://maps.google.com/?q=Lome,Togo',
-      color: '#45B7D1',
+      color: '#22d3ee',
     },
   ];
 
   return (
-    <section
-      id="contact"
-      className="section-padding bg-dark-950/5 relative overflow-hidden"
-    >
+    <section id="contact" className="section-padding relative overflow-hidden">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-dark/20"></div>
+
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -242,7 +242,7 @@ export default function Contact() {
                 >
                   <label
                     htmlFor="name"
-                    className="block text-white font-medium flex items-center space-x-2"
+                    className="text-white font-medium flex items-center space-x-2"
                   >
                     <FaUser className="text-primary-400 text-sm" />
                     <span>Full Name</span>
@@ -288,7 +288,7 @@ export default function Contact() {
                 >
                   <label
                     htmlFor="email"
-                    className="block text-white font-medium flex items-center space-x-2"
+                    className="text-white font-medium flex items-center space-x-2"
                   >
                     <FaEnvelope className="text-primary-400 text-sm" />
                     <span>Email Address</span>
@@ -334,7 +334,7 @@ export default function Contact() {
                 >
                   <label
                     htmlFor="message"
-                    className="block text-white font-medium flex items-center space-x-2"
+                    className="text-white font-medium flex items-center space-x-2"
                   >
                     <FaComments className="text-primary-400 text-sm" />
                     <span>Message</span>

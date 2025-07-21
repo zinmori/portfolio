@@ -106,7 +106,7 @@ export default {
         'gradient-secondary':
           'linear-gradient(135deg, #22d3ee 0%, #2dd4bf 100%)',
         'gradient-dark':
-          'linear-gradient(135deg, #0c0c0c 0%, #14b8a6 50%, #06b6d4 100%)',
+          'linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%)',
       },
       backdropBlur: {
         xs: '2px',

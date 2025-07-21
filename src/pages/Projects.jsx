@@ -9,6 +9,7 @@ import {
   FaPython,
   FaCode,
   FaRocket,
+  FaRobot,
 } from 'react-icons/fa';
 import {
   SiNextdotjs,
@@ -16,6 +17,17 @@ import {
   SiMongodb,
   SiTailwindcss,
   SiExpress,
+  SiDart,
+  SiFirebase,
+  SiJavascript,
+  SiCss3,
+  SiHtml5,
+  SiSqlite,
+  SiPandas,
+  SiNumpy,
+  SiPlotly,
+  SiJupyter,
+  SiScikitlearn,
 } from 'react-icons/si';
 
 import gplayImg from '../assets/images/gplay.png';
@@ -208,6 +220,36 @@ export default function Projects() {
         return <SiTailwindcss className="text-cyan-400" />;
       case 'express':
         return <SiExpress className="text-gray-400" />;
+      case 'dart':
+        return <SiDart className="text-blue-400" />;
+      case 'firebase':
+        return <SiFirebase className="text-yellow-400" />;
+      case 'javascript':
+        return <SiJavascript className="text-yellow-400" />;
+      case 'css':
+        return <SiCss3 className="text-blue-400" />;
+      case 'html':
+        return <SiHtml5 className="text-orange-400" />;
+      case 'sqlite':
+        return <SiSqlite className="text-gray-400" />;
+      case 'pandas':
+        return <SiPandas className="text-blue-400" />;
+      case 'numpy':
+        return <SiNumpy className="text-blue-400" />;
+      case 'plotly':
+        return <SiPlotly className="text-blue-400" />;
+      case 'ml':
+        return <FaRobot className="text-blue-400" />;
+      case 'jupyter':
+        return <SiJupyter className="text-blue-400" />;
+      case 'push notifications':
+        return <FaRocket className="text-orange-400" />;
+      case 'scikit-learn':
+        return <SiScikitlearn className="text-blue-400" />;
+      case 'matplotlib':
+        return <SiPlotly className="text-blue-400" />;
+      case 'seaborn':
+        return <SiPlotly className="text-blue-400" />;
       default:
         return <FaCode className="text-gray-400" />;
     }
@@ -216,7 +258,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="section-padding bg-dark-950 relative overflow-hidden"
+      className="section-padding bg-dark-950/70 relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

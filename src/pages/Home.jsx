@@ -41,10 +41,10 @@ export default function Home() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-dark/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-cyan-900/10 to-teal-900/10"></div>
 
       {/* Floating geometric shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-20 left-10 w-20 h-20 border-2 border-primary-500/30 rounded-full"
           animate={{
@@ -81,7 +81,7 @@ export default function Home() {
             ease: 'easeInOut',
           }}
         />
-      </div>
+      </div> */}
 
       <motion.div
         ref={ref}
@@ -258,7 +258,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
+        {/* <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           variants={itemVariants}
         >
@@ -270,7 +270,7 @@ export default function Home() {
             <span className="text-sm font-mono">Scroll to explore</span>
             <FaArrowDown className="text-primary-400" />
           </motion.div>
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </section>
   );

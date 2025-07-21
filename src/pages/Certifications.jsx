@@ -109,7 +109,7 @@ const Certifications = () => {
   return (
     <section
       id="certifications"
-      className="section-padding bg-dark-950 relative overflow-hidden"
+      className="section-padding bg-dark-950/60 relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
