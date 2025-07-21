@@ -47,7 +47,7 @@ const educationData = [
 
 const Education = () => {
   const [ref, inView] = useInView({
-    threshold: 0.1,
+    // threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -56,19 +56,19 @@ const Education = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: 'easeOut',
       },
     },

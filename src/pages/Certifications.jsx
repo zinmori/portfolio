@@ -79,7 +79,7 @@ const certificatesData = [
 
 const Certifications = () => {
   const [ref, inView] = useInView({
-    threshold: 0.1,
+    // threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -88,19 +88,19 @@ const Certifications = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: 'easeOut',
       },
     },
