@@ -86,11 +86,13 @@ export default function Navbar() {
           whileTap={{ scale: 0.95 }}
         >
           <motion.div
-            className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center shadow-lg"
+            className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg"
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-white font-bold text-xl font-display">Z</span>
+            <span className="text-primary font-bold text-xl font-display">
+              Z
+            </span>
           </motion.div>
           <motion.span
             className="hidden sm:block text-xl font-display font-bold text-white group-hover:text-primary-400 transition-colors"
