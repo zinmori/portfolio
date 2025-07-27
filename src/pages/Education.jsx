@@ -24,7 +24,7 @@ const educationData = [
       'Web Development',
       'Calculus and Linear Algebra',
     ],
-    color: '#06b6d4',
+    color: '#22c55e',
   },
   // {
   //   degree: 'High School Diploma',
@@ -77,7 +77,7 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="section-padding bg-dark-950/70 relative overflow-hidden"
+      className="section-padding relative overflow-hidden"
     >
       {/* Background decorative elements */}
       {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">

@@ -19,7 +19,7 @@ const ParticleBackground = () => {
     // Particle configuration
     const particles = [];
     const particleCount = 80;
-    const colors = ['#06b6d4', '#0891b2', '#22d3ee', '#14b8a6', '#2dd4bf'];
+    const colors = ['#22c55e', '#16a34a', '#4ade80', '#15803d', '#86efac'];
 
     class Particle {
       constructor() {
@@ -84,7 +84,7 @@ const ParticleBackground = () => {
 
           if (distance < 100) {
             ctx.globalAlpha = (1 - distance / 100) * 0.2;
-            ctx.strokeStyle = '#06b6d4';
+            ctx.strokeStyle = '#22c55e';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);

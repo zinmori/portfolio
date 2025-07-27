@@ -217,7 +217,7 @@ export default function Projects() {
       case 'mongodb':
         return <SiMongodb className="text-green-600" />;
       case 'tailwind css':
-        return <SiTailwindcss className="text-cyan-400" />;
+        return <SiTailwindcss className="text-green-400" />;
       case 'express':
         return <SiExpress className="text-gray-400" />;
       case 'dart':
@@ -256,10 +256,7 @@ export default function Projects() {
   };
 
   return (
-    <section
-      id="projects"
-      className="section-padding bg-dark-950/70 relative overflow-hidden"
-    >
+    <section id="projects" className="section-padding relative overflow-hidden">
       {/* Background decorative elements */}
       {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

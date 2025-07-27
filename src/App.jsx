@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-dark overflow-x-hidden">
+    <div className="relative min-h-screen bg-black overflow-x-hidden">
       <AnimatePresence mode="wait">
         {isLoading ? (
           <Loader key="loader" />

@@ -82,7 +82,7 @@ const experienceData = [
       'Git',
       'REST APIs',
     ],
-    color: '#0891b2',
+    color: '#16a34a',
     icon: FaCode,
   },
   {
@@ -109,7 +109,7 @@ const experienceData = [
       'Firebase',
       'Payment APIs',
     ],
-    color: '#06b6d4',
+    color: '#22c55e',
     icon: FaLaptopCode,
   },
 ];
@@ -146,7 +146,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="section-padding bg-dark-950/40 relative overflow-hidden"
+      className="section-padding relative overflow-hidden"
     >
       {/* Background decorative elements */}
       {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">

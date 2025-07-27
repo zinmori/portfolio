@@ -41,7 +41,7 @@ export default function Home() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-cyan-900/10 to-teal-900/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-green-900/10 to-emerald-900/10"></div>
 
       <motion.div
         ref={ref}

@@ -56,7 +56,7 @@ const skillsData = [
       { name: 'HTML/CSS/JavaScript', color: '#F7DF1E', icon: FaHtml5 },
       { name: 'React.js', color: '#61DAFB', icon: FaReact },
       { name: 'Next.js', color: '#FFFFFF', icon: SiNextdotjs },
-      { name: 'Tailwind CSS', color: '#06B6D4', icon: SiTailwindcss },
+      { name: 'Tailwind CSS', color: '#22c55e', icon: SiTailwindcss },
       { name: 'Bootstrap', color: '#7952B3', icon: FaBootstrap },
     ],
   },
@@ -134,10 +134,7 @@ const Skills = () => {
   };
 
   return (
-    <section
-      id="skills"
-      className="section-padding bg-dark-950/80 relative overflow-hidden"
-    >
+    <section id="skills" className="section-padding relative overflow-hidden">
       {/* Background decorative elements */}
       {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

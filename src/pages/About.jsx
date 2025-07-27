@@ -32,10 +32,7 @@ export default function About() {
   };
 
   return (
-    <section
-      id="about"
-      className="section-padding bg-dark-950/60 relative overflow-hidden"
-    >
+    <section id="about" className="section-padding  relative overflow-hidden">
       {/* Background decorative elements */}
       {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

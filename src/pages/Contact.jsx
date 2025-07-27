@@ -130,21 +130,21 @@ export default function Contact() {
       label: 'Phone',
       value: '+228 91 35 59 86',
       href: 'tel:+22891355986',
-      color: '#06b6d4',
+      color: '#22c55e',
     },
     {
       icon: FaEnvelope,
       label: 'Email',
       value: 'ezechielagban1@gmail.com',
       href: 'mailto:ezechielagban1@gmail.com',
-      color: '#0891b2',
+      color: '#16a34a',
     },
     {
       icon: FaMapMarkerAlt,
       label: 'Location',
       value: 'Lomé, Togo',
       href: 'https://maps.google.com/?q=Lome,Togo',
-      color: '#22d3ee',
+      color: '#4ade80',
     },
   ];
 
