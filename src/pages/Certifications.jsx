@@ -13,8 +13,37 @@ import reactImg from '../assets/images/react.png';
 import nodeImg from '../assets/images/node.png';
 import mlImg from '../assets/images/mlspe.png';
 import iaImg from '../assets/images/ia.png';
+import zindi from '../assets/images/zindi.png';
+import genai from '../assets/images/genai.png';
 
 const certificatesData = [
+  {
+    image: zindi,
+    title: 'Togo Fiber Optics Uptake Prediction Challenge',
+    institution: 'Zindi',
+    date: 'June 2024',
+    link: 'https://zindi.africa/competitions/togo-fiber-optics-uptake-prediction-challenge?referrer=BigZ',
+    category: 'Machine Learning',
+    skills: [
+      'Python',
+      'NumPy',
+      'Pandas',
+      'Scikit-learn',
+      'XGBoost',
+      'LightGBM',
+    ],
+    color: '#4ECDC4',
+  },
+  {
+    image: genai,
+    title: 'Foundation of Generative AI',
+    institution: 'Udacity',
+    date: 'January 2025',
+    link: 'https://www.udacity.com/certificate/e/e161a868-b7bc-11ef-8935-c31b4b6f030b',
+    category: 'Artificial Intelligence',
+    skills: ['Python', 'NumPy', 'Pandas', 'PyTorch'],
+    color: '#FF6B6B',
+  },
   {
     image: iaImg,
     title: 'AI Programming with Python',
@@ -79,7 +108,7 @@ const certificatesData = [
 
 const Certifications = () => {
   const [ref, inView] = useInView({
-    // threshold: 0.1,
+    threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -112,7 +141,7 @@ const Certifications = () => {
       className="section-padding bg-dark-950/60 relative overflow-hidden"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/3 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
           animate={{
@@ -137,7 +166,7 @@ const Certifications = () => {
             ease: 'easeInOut',
           }}
         />
-      </div>
+      </div> */}
 
       <motion.div
         ref={ref}

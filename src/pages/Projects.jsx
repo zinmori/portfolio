@@ -261,7 +261,7 @@ export default function Projects() {
       className="section-padding bg-dark-950/70 relative overflow-hidden"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
           animate={{
@@ -286,7 +286,7 @@ export default function Projects() {
             ease: 'easeInOut',
           }}
         />
-      </div>
+      </div> */}
 
       <motion.div
         ref={ref}

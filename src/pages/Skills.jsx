@@ -24,31 +24,40 @@ import {
   SiPytorch,
   SiTensorflow,
   SiQgis,
+  SiDocker,
+  SiPostman,
+  SiFigma,
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
 
 const skillsData = [
   {
+    name: 'Data Science & AI',
+    icon: FaRobot,
+    color: '#FF6F00',
+    skills: [
+      { name: 'Pandas, Numpy', color: '#150458', icon: SiPandas },
+      { name: 'Scikit-learn', color: '#F7931E', icon: SiScikitlearn },
+      { name: 'Pytorch', color: '#EE4C2C', icon: SiPytorch },
+      { name: 'Tensorflow', color: '#FF6F00', icon: SiTensorflow },
+      {
+        name: 'GIS, Geopandas, QGis, Google Earth Engine',
+        color: '#589632',
+        icon: SiQgis,
+      },
+    ],
+  },
+  {
     name: 'Frontend',
     icon: FaReact,
     color: '#61DAFB',
     skills: [
-      {
-        name: 'HTML/CSS/JavaScript',
-        level: 90,
-        color: '#F7DF1E',
-        icon: FaHtml5,
-      },
-      { name: 'React.js', level: 85, color: '#61DAFB', icon: FaReact },
-      { name: 'Next.js', level: 80, color: '#FFFFFF', icon: SiNextdotjs },
-      {
-        name: 'Tailwind CSS',
-        level: 90,
-        color: '#06B6D4',
-        icon: SiTailwindcss,
-      },
-      { name: 'Bootstrap', level: 85, color: '#7952B3', icon: FaBootstrap },
+      { name: 'HTML/CSS/JavaScript', color: '#F7DF1E', icon: FaHtml5 },
+      { name: 'React.js', color: '#61DAFB', icon: FaReact },
+      { name: 'Next.js', color: '#FFFFFF', icon: SiNextdotjs },
+      { name: 'Tailwind CSS', color: '#06B6D4', icon: SiTailwindcss },
+      { name: 'Bootstrap', color: '#7952B3', icon: FaBootstrap },
     ],
   },
   {
@@ -56,15 +65,10 @@ const skillsData = [
     icon: FaNodeJs,
     color: '#68A063',
     skills: [
-      { name: 'Node.js/Express', level: 75, color: '#68A063', icon: FaNodeJs },
-      {
-        name: 'Python/Django/FastAPI',
-        level: 85,
-        color: '#3776AB',
-        icon: FaPython,
-      },
-      { name: 'Java', level: 70, color: '#ED8B00', icon: FaJava },
-      { name: 'RESTful APIs', level: 80, color: '#FF6B6B', icon: TbApi },
+      { name: 'Node.js/Express', color: '#68A063', icon: FaNodeJs },
+      { name: 'Python/Django/FastAPI', color: '#3776AB', icon: FaPython },
+      { name: 'Java', color: '#ED8B00', icon: FaJava },
+      { name: 'RESTful APIs', color: '#FF6B6B', icon: TbApi },
     ],
   },
   {
@@ -72,47 +76,30 @@ const skillsData = [
     icon: FaDatabase,
     color: '#F29111',
     skills: [
-      { name: 'MongoDB', level: 80, color: '#47A248', icon: SiMongodb },
-      { name: 'MySQL', level: 80, color: '#00758F', icon: SiMysql },
-      { name: 'PostgreSQL', level: 75, color: '#336791', icon: SiPostgresql },
-      { name: 'Firebase', level: 85, color: '#FFCA28', icon: SiFirebase },
+      { name: 'MongoDB', color: '#47A248', icon: SiMongodb },
+      { name: 'MySQL', color: '#00758F', icon: SiMysql },
+      { name: 'PostgreSQL', color: '#336791', icon: SiPostgresql },
     ],
   },
   {
-    name: 'Mobile & Tools',
+    name: 'Mobile Development',
     icon: SiFlutter,
     color: '#02569B',
     skills: [
-      { name: 'Flutter/Dart', level: 80, color: '#02569B', icon: SiFlutter },
-      { name: 'Git/GitHub', level: 85, color: '#F05032', icon: SiGit },
-      {
-        name: 'Visual Studio Code',
-        level: 85,
-        color: '#007ACC',
-        icon: VscVscode,
-      },
+      { name: 'Flutter/Dart', color: '#02569B', icon: SiFlutter },
+      { name: 'Firebase', color: '#FFCA28', icon: SiFirebase },
     ],
   },
   {
-    name: 'Data Science & AI',
-    icon: FaRobot,
-    color: '#FF6F00',
+    name: 'Tools & DevOps',
+    icon: SiGit,
+    color: '#F05032',
     skills: [
-      { name: 'Pandas, Numpy', level: 85, color: '#150458', icon: SiPandas },
-      {
-        name: 'Scikit-learn',
-        level: 80,
-        color: '#F7931E',
-        icon: SiScikitlearn,
-      },
-      { name: 'Pytorch', level: 70, color: '#EE4C2C', icon: SiPytorch },
-      { name: 'Tensorflow', level: 65, color: '#FF6F00', icon: SiTensorflow },
-      {
-        name: 'GIS, Geopandas, QGis, Google Earth Engine',
-        level: 65,
-        color: '#589632',
-        icon: SiQgis,
-      },
+      { name: 'Git/GitHub', color: '#F05032', icon: SiGit },
+      { name: 'Docker', color: '#2496ED', icon: SiDocker },
+      { name: 'Visual Studio Code', color: '#007ACC', icon: VscVscode },
+      { name: 'Postman', color: '#FF6C37', icon: SiPostman },
+      { name: 'Figma', color: '#F24E1E', icon: SiFigma },
     ],
   },
 ];
@@ -152,7 +139,7 @@ const Skills = () => {
       className="section-padding bg-dark-950/80 relative overflow-hidden"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-10 left-10 w-32 h-32 bg-primary-500/5 rounded-full blur-3xl"
           animate={{
@@ -177,7 +164,7 @@ const Skills = () => {
             ease: 'easeInOut',
           }}
         />
-      </div>
+      </div> */}
 
       <motion.div
         ref={ref}
@@ -243,65 +230,32 @@ const Skills = () => {
                   <h3 className="text-2xl font-display font-bold text-white">
                     {category.name}
                   </h3>
-                  <p className="text-gray-400 font-mono text-sm">Development</p>
+                  {/* <p className="text-gray-400 font-mono text-sm">Development</p> */}
                 </div>
               </div>
 
               {/* Skills list */}
-              <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    className="space-y-3"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{
-                      delay: 0.5 + categoryIndex * 0.2 + skillIndex * 0.1,
+                      delay: 0.2 + categoryIndex * 0.1 + skillIndex * 0.05,
                     }}
+                    whileHover={{ scale: 1.02 }}
                   >
-                    <div className="flex justify-between items-center">
-                      <span className="text-white font-medium">
-                        {skill.icon && (
-                          <skill.icon className="inline-block mr-2" />
-                        )}
-                        {skill.name}
-                      </span>
-                      <span
-                        className="font-mono text-sm font-bold"
+                    {skill.icon && (
+                      <skill.icon
+                        className="text-lg flex-shrink-0"
                         style={{ color: skill.color }}
-                      >
-                        {skill.level}%
-                      </span>
-                    </div>
-
-                    <div className="relative">
-                      <div className="w-full bg-dark-700 rounded-full h-2 overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full relative overflow-hidden"
-                          style={{ backgroundColor: skill.color }}
-                          initial={{ width: 0 }}
-                          animate={inView ? { width: `${skill.level}%` } : {}}
-                          transition={{
-                            duration: 1.5,
-                            delay: 0.7 + categoryIndex * 0.2 + skillIndex * 0.1,
-                            ease: 'easeOut',
-                          }}
-                        >
-                          {/* Shimmer effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                            animate={{ x: ['-100%', '100%'] }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              ease: 'linear',
-                              delay:
-                                1.2 + categoryIndex * 0.2 + skillIndex * 0.1,
-                            }}
-                          />
-                        </motion.div>
-                      </div>
-                    </div>
+                      />
+                    )}
+                    <span className="text-white font-medium text-sm">
+                      {skill.name}
+                    </span>
                   </motion.div>
                 ))}
               </div>

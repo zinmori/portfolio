@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import profilImg from '../assets/images/profil.jpg';
 import ConnectBtn from '../components/ConnectBtn';
-import { FaGithub, FaLinkedin, FaWhatsapp, FaArrowDown } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import cvPdf from '../assets/docs/simplecv.pdf';
 
 export default function Home() {
@@ -43,46 +43,6 @@ export default function Home() {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-cyan-900/10 to-teal-900/10"></div>
 
-      {/* Floating geometric shapes */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-20 h-20 border-2 border-primary-500/30 rounded-full"
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-20 w-16 h-16 bg-gradient-primary/20 rounded-lg"
-          animate={{
-            y: [0, 30, 0],
-            rotate: [0, -180, -360],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 w-12 h-12 border-2 border-secondary-500/40 rounded-lg rotate-45"
-          animate={{
-            y: [0, -25, 0],
-            x: [0, 15, 0],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -94,23 +54,16 @@ export default function Home() {
           {/* Left side - Text content */}
           <motion.div variants={itemVariants} className="space-y-8">
             <motion.div className="space-y-4" variants={itemVariants}>
-              {/* <motion.p
-                className="text-primary-400 font-mono text-lg tracking-wide"
-                variants={itemVariants}
-              >
-                &lt;hello_world&gt;
-              </motion.p> */}
-
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight">
                 <span className="text-white">I&apos;m </span>
-                <span className="text-gradient block">
+                <span className="text-gradient block ">
                   <TypeAnimation
                     sequence={[
                       'Ezechiel',
                       2000,
-                      'Developer',
+                      'Data Scientist',
                       2000,
-                      'Creator',
+                      'Software Engineer',
                       2000,
                       'Innovator',
                       2000,
@@ -128,21 +81,14 @@ export default function Home() {
               >
                 A passionate{' '}
                 <span className="text-primary-400 font-medium">
-                  Full-Stack Developer
+                  Data Scientist
                 </span>{' '}
                 and{' '}
                 <span className="text-secondary-400 font-medium">
-                  Data Scientist
+                  Software developer
                 </span>{' '}
                 crafting digital experiences that make a difference.
               </motion.p>
-
-              {/* <motion.p
-                className="text-primary-400 font-mono"
-                variants={itemVariants}
-              >
-                &lt;/hello_world&gt;
-              </motion.p> */}
             </motion.div>
 
             {/* CTA Buttons */}
@@ -176,7 +122,6 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
               >
                 <span>Download CV</span>
-                <span className="text-sm">📄</span>
               </motion.a>
             </motion.div>
 
@@ -241,36 +186,9 @@ export default function Home() {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
               />
-
-              {/* Status indicator */}
-              {/* <motion.div
-                className="absolute bottom-8 right-8 w-6 h-6 bg-green-500 rounded-full border-4 border-white shadow-lg"
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
-              /> */}
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        {/* <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          variants={itemVariants}
-        >
-          <motion.div
-            className="flex flex-col items-center space-y-2 text-gray-400"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <span className="text-sm font-mono">Scroll to explore</span>
-            <FaArrowDown className="text-primary-400" />
-          </motion.div>
-        </motion.div> */}
       </motion.div>
     </section>
   );

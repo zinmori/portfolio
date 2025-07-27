@@ -19,21 +19,24 @@ const experienceData = [
     period: 'December 2024 - Present',
     location: 'Lomé, Togo',
     description:
-      'Led a team project analyzing climate data for West Africa, applying machine learning techniques to predict weather patterns.',
+      'Specializing in satellite imagery analysis and machine learning applications for environmental monitoring and climate data analysis.',
     achievements: [
-      'Collected and cleaned datasets from multiple weather stations',
-      'Applied machine learning algorithms for pattern recognition',
-      'Created data visualizations using Python and matplotlib',
-      'Presented findings to university faculty and peers',
-      'Published research findings in university journal',
+      'Trained in MOSAIKS (Multi-task Observation using SAtellite Imagery & Kitchen Sinks) methodology for satellite image processing',
+      'Implemented CNN kernel feature extraction from satellite imagery for machine learning tasks',
+      'Built forest monitoring system using satellite imagery to track ecosystem evolution',
+      'Analyzed deforestation patterns, reforestation areas, and carbon emission metrics',
     ],
     technologies: [
       'Python',
+      'TensorFlow',
+      'Scikit-learn',
+      'Satellite Imagery',
+      'CNN',
+      'MOSAIKS',
+      'Google Earth Engine',
+      'Remote Sensing',
       'Pandas',
       'NumPy',
-      'Scikit-learn',
-      'Matplotlib',
-      'Jupyter',
     ],
     color: '#f093fb',
     icon: FaProjectDiagram,
@@ -63,15 +66,22 @@ const experienceData = [
     period: 'July 2024 - December 2024',
     location: 'Lomé, Togo',
     description:
-      'Contributed to the development of an e-commerce platform, gaining hands-on experience in agile development and team collaboration.',
+      'Contributed to the development of a national portal for supporting the startup ecosystem in Togo, creating a platform to connect entrepreneurs, investors, and support organizations.',
     achievements: [
-      'Developed frontend components using React.js and Tailwind CSS',
-      'Implemented user authentication and authorization features',
-      'Optimized application performance, reducing load time by 30%',
-      'Participated in code reviews and agile development processes',
-      'Created technical documentation for new features',
+      'Developed frontend components for the startup ecosystem portal using React.js',
+      'Built backend APIs and services using Django framework',
+      'Created features for startup profile management and showcase',
+      'Containerized application using Docker for consistent deployment',
     ],
-    technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Git', 'REST APIs'],
+    technologies: [
+      'React',
+      'Django',
+      'JavaScript',
+      'Python',
+      'Docker',
+      'Git',
+      'REST APIs',
+    ],
     color: '#0891b2',
     icon: FaCode,
   },
@@ -84,11 +94,10 @@ const experienceData = [
     description:
       'Developing custom web and mobile applications for various clients, focusing on modern technologies and user-centered design.',
     achievements: [
-      'Built 10+ responsive web applications using React.js and Next.js',
-      'Developed 3 mobile applications using Flutter/Dart',
-      'Implemented RESTful APIs with Node.js and Express',
+      'Built restaurant management system with mobile and web applications for order and menu management',
+      'Developed real-time order tracking and notification system for restaurant staff',
+      'Developed mobile applications using Flutter/Dart for cross-platform compatibility',
       'Integrated various databases including MongoDB and PostgreSQL',
-      'Collaborated with international clients across different time zones',
     ],
     technologies: [
       'React',
@@ -98,6 +107,7 @@ const experienceData = [
       'MongoDB',
       'PostgreSQL',
       'Firebase',
+      'Payment APIs',
     ],
     color: '#06b6d4',
     icon: FaLaptopCode,
@@ -139,7 +149,7 @@ const Experience = () => {
       className="section-padding bg-dark-950/40 relative overflow-hidden"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/3 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
           animate={{
@@ -164,7 +174,7 @@ const Experience = () => {
             ease: 'easeInOut',
           }}
         />
-      </div>
+      </div> */}
 
       <motion.div
         ref={ref}

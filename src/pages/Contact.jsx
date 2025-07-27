@@ -154,7 +154,7 @@ export default function Contact() {
       <div className="absolute inset-0 bg-gradient-dark/20"></div>
 
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 -left-40 w-80 h-80 bg-primary-500/5 rounded-full blur-3xl"
           animate={{
@@ -179,7 +179,7 @@ export default function Contact() {
             ease: 'easeInOut',
           }}
         />
-      </div>
+      </div> */}
 
       <motion.div
         ref={ref}
