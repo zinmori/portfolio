@@ -5,16 +5,16 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#ecfeff',
-          100: '#cffafe',
-          200: '#a5f3fc',
-          300: '#67e8f9',
-          400: '#22d3ee',
-          500: '#06b6d4',
-          600: '#0891b2',
-          700: '#0e7490',
-          800: '#155e75',
-          900: '#164e63',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
         },
         secondary: {
           50: '#f0fdfa',
@@ -64,8 +64,8 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(6, 182, 212, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(34, 197, 94, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(34, 197, 94, 0.6)' },
         },
         'gradient-shift': {
           '0%': { backgroundPosition: '0% 50%' },
@@ -102,9 +102,9 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
         'gradient-secondary':
-          'linear-gradient(135deg, #22d3ee 0%, #2dd4bf 100%)',
+          'linear-gradient(135deg, #4ade80 0%, #22c55e 100%)',
         'gradient-dark':
           'linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%)',
       },
@@ -112,7 +112,7 @@ export default {
         xs: '2px',
       },
       boxShadow: {
-        neon: '0 0 5px #06b6d4, 0 0 10px #06b6d4, 0 0 20px #06b6d4, 0 0 40px #06b6d4',
+        neon: '0 0 5px #22c55e, 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 40px #22c55e',
         glass: '0 8px 32px rgba(0, 0, 0, 0.3)',
         hover: '0 20px 40px rgba(0, 0, 0, 0.3)',
       },
