@@ -28,6 +28,8 @@ import {
   SiPlotly,
   SiJupyter,
   SiScikitlearn,
+  SiTensorflow,
+  SiPytorch,
 } from 'react-icons/si';
 
 import gplayImg from '../assets/images/gplay.png';
@@ -39,8 +41,41 @@ import termImg from '../assets/images/term.png';
 import mealsImg from '../assets/images/Meals.png';
 import spsmob from '../assets/images/spsmob.png';
 import muzikImg from '../assets/images/muzik.png';
+import snakeImg from '../assets/images/snake.png';
+import flowerImg from '../assets/images/flower.jpeg';
 
 const projectsData = [
+  {
+    imgUrl: snakeImg,
+    title: 'Snake Game AI Agent',
+    description:
+      'Reinforcement learning project where an AI agent learns to play the classic Snake game using deep Q-learning algorithms, achieving optimal gameplay through trial and error.',
+    projectCodeLink: 'https://github.com/zinmori/snake_ai',
+    projectLink: 'https://snakeaiz.streamlit.app/',
+    category: 'Data Science',
+    technologies: [
+      'Python',
+      'PyTorch',
+      'Reinforcement Learning',
+      'Deep Q-Learning',
+    ],
+    tags: ['All', 'Data'],
+    color: '#8B5CF6',
+    featured: false,
+  },
+  {
+    imgUrl: flowerImg,
+    title: 'Flower Classification',
+    description:
+      'Image classification project using deep learning to identify different species of flowers with high accuracy.',
+    projectCodeLink: 'https://github.com/zinmori/flowers_app',
+    projectLink: 'https://flowers-app.streamlit.app/',
+    category: 'Data Science',
+    technologies: ['Python', 'PyTorch', 'ResNet', 'CNN', 'Computer Vision'],
+    tags: ['All', 'Data'],
+    color: '#8B5CF6',
+    featured: false,
+  },
   {
     imgUrl: gplayImg,
     title: 'Analysis of the Android Market on Play Store',
@@ -154,7 +189,7 @@ const projectsData = [
 
 const filterOptions = [
   { label: 'All Projects', value: 'All', icon: FaCode },
-  { label: 'Data Science', value: 'Data', icon: FaPython },
+  { label: 'Data Science & AI', value: 'Data', icon: FaPython },
   { label: 'Web Development', value: 'Web', icon: FaReact },
   { label: 'Mobile Apps', value: 'Mobile', icon: SiFlutter },
 ];
@@ -250,6 +285,12 @@ export default function Projects() {
         return <SiPlotly className="text-blue-400" />;
       case 'seaborn':
         return <SiPlotly className="text-blue-400" />;
+      case 'tensorflow':
+        return <SiTensorflow className="text-orange-400" />;
+      case 'pytorch':
+        return <SiPytorch className="text-red-600" />;
+      case 'reinforcement learning':
+        return <FaRobot className="text-blue-400" />;
       default:
         return <FaCode className="text-gray-400" />;
     }
@@ -257,34 +298,6 @@ export default function Projects() {
 
   return (
     <section id="projects" className="section-padding relative overflow-hidden">
-      {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-32 w-80 h-80 bg-secondary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -294,13 +307,6 @@ export default function Projects() {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          {/* <motion.p
-            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
-            variants={itemVariants}
-          >
-            &lt;portfolio&gt;
-          </motion.p> */}
-
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
             variants={itemVariants}
@@ -316,13 +322,6 @@ export default function Projects() {
             abilities across web development, mobile apps, and data science
             projects.
           </motion.p>
-
-          {/* <motion.p
-            className="text-primary-400 font-mono mt-4"
-            variants={itemVariants}
-          >
-            &lt;/portfolio&gt;
-          </motion.p> */}
         </motion.div>
 
         {/* Filter tabs */}
@@ -381,7 +380,7 @@ export default function Projects() {
                     <motion.img
                       src={project.imgUrl}
                       alt={project.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-64 object-cover"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     />
@@ -398,18 +397,6 @@ export default function Projects() {
                         <span>Featured</span>
                       </motion.div>
                     )}
-
-                    {/* Category badge */}
-                    <motion.div
-                      className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium"
-                      style={{
-                        backgroundColor: `${project.color}20`,
-                        color: project.color,
-                        border: `1px solid ${project.color}40`,
-                      }}
-                    >
-                      {project.category}
-                    </motion.div>
 
                     {/* Overlay on hover */}
                     <motion.div className="absolute inset-0 bg-black/60 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -471,106 +458,12 @@ export default function Projects() {
                         </div>
                       )}
                     </div>
-
-                    {/* Action buttons */}
-                    {/* <div className="flex space-x-3">
-                      {project.projectLink && (
-                        <motion.a
-                          href={project.projectLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 btn-primary text-center text-sm py-2"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          View Live
-                        </motion.a>
-                      )}
-                      {project.projectCodeLink && (
-                        <motion.a
-                          href={project.projectCodeLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex-1 btn-secondary text-center text-sm py-2 ${
-                            !project.projectLink ? 'w-full' : ''
-                          }`}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          View Code
-                        </motion.a>
-                      )}
-                    </div> */}
                   </div>
                 </motion.div>
               </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>
-
-        {/* Bottom stats */}
-        {/* <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6"
-          variants={itemVariants}
-        >
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">
-              {projectsData.length}+
-            </div>
-            <p className="text-gray-300 font-medium">Projects Built</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">3</div>
-            <p className="text-gray-300 font-medium">Technology Stacks</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">15+</div>
-            <p className="text-gray-300 font-medium">Technologies Used</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">100%</div>
-            <p className="text-gray-300 font-medium">Open Source</p>
-          </motion.div>
-        </motion.div> */}
-
-        {/* Call to action */}
-        {/* <motion.div className="text-center mt-16" variants={itemVariants}>
-          <motion.p
-            className="text-gray-300 text-lg mb-8"
-            variants={itemVariants}
-          >
-            Like what you see? Let&apos;s collaborate on your next project!
-          </motion.p>
-
-          <motion.a
-            href="#contact"
-            className="btn-primary inline-flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>Start a Project</span>
-            <span>🚀</span>
-          </motion.a>
-        </motion.div> */}
       </motion.div>
     </section>
   );

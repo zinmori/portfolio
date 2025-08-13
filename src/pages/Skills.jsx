@@ -9,6 +9,7 @@ import {
   FaHtml5,
   FaJava,
   FaRobot,
+  FaGamepad,
 } from 'react-icons/fa';
 import {
   SiNextdotjs,
@@ -27,6 +28,9 @@ import {
   SiDocker,
   SiPostman,
   SiFigma,
+  SiAmazonaws,
+  SiJupyter,
+  SiVercel,
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
@@ -41,6 +45,7 @@ const skillsData = [
       { name: 'Scikit-learn', color: '#F7931E', icon: SiScikitlearn },
       { name: 'Pytorch', color: '#EE4C2C', icon: SiPytorch },
       { name: 'Tensorflow', color: '#FF6F00', icon: SiTensorflow },
+      { name: 'AutoGluon', color: '#FF6F00', icon: FaRobot },
       {
         name: 'GIS, Geopandas, QGis, Google Earth Engine',
         color: '#589632',
@@ -56,7 +61,7 @@ const skillsData = [
       { name: 'HTML/CSS/JavaScript', color: '#F7DF1E', icon: FaHtml5 },
       { name: 'React.js', color: '#61DAFB', icon: FaReact },
       { name: 'Next.js', color: '#FFFFFF', icon: SiNextdotjs },
-      { name: 'Tailwind CSS', color: '#22c55e', icon: SiTailwindcss },
+      { name: 'Tailwind CSS', color: '#27E6E2', icon: SiTailwindcss },
       { name: 'Bootstrap', color: '#7952B3', icon: FaBootstrap },
     ],
   },
@@ -79,14 +84,6 @@ const skillsData = [
       { name: 'MongoDB', color: '#47A248', icon: SiMongodb },
       { name: 'MySQL', color: '#00758F', icon: SiMysql },
       { name: 'PostgreSQL', color: '#336791', icon: SiPostgresql },
-    ],
-  },
-  {
-    name: 'Mobile Development',
-    icon: SiFlutter,
-    color: '#02569B',
-    skills: [
-      { name: 'Flutter/Dart', color: '#02569B', icon: SiFlutter },
       { name: 'Firebase', color: '#FFCA28', icon: SiFirebase },
     ],
   },
@@ -97,9 +94,21 @@ const skillsData = [
     skills: [
       { name: 'Git/GitHub', color: '#F05032', icon: SiGit },
       { name: 'Docker', color: '#2496ED', icon: SiDocker },
-      { name: 'Visual Studio Code', color: '#007ACC', icon: VscVscode },
+      { name: 'AWS', color: '#FF9900', icon: SiAmazonaws },
+      { name: 'Vercel', color: '#000000', icon: SiVercel },
       { name: 'Postman', color: '#FF6C37', icon: SiPostman },
       { name: 'Figma', color: '#F24E1E', icon: SiFigma },
+    ],
+  },
+  {
+    name: 'Others',
+    icon: SiFlutter,
+    color: '#02569B',
+    skills: [
+      { name: 'Flutter/Dart', color: '#02569B', icon: SiFlutter },
+      { name: 'Pygame', color: '#FFFFFF', icon: FaGamepad },
+      { name: 'Jupyter', color: '#FF6F00', icon: SiJupyter },
+      { name: 'Visual Studio Code', color: '#007ACC', icon: VscVscode },
     ],
   },
 ];
