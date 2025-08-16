@@ -50,7 +50,7 @@ export default function Home() {
         animate={inView ? 'visible' : 'hidden'}
         className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20"
       >
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="flex flex-col-reverse lg:flex-row justify-between gap-12 items-center">
           {/* Left side - Text content */}
           <motion.div variants={itemVariants} className="space-y-8">
             <motion.div className="space-y-4" variants={itemVariants}>
