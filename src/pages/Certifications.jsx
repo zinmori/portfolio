@@ -15,8 +15,19 @@ import mlImg from '../assets/images/mlspe.png';
 import iaImg from '../assets/images/ia.png';
 import zindi from '../assets/images/zindi.png';
 import genai from '../assets/images/genai.png';
+import awsml from '../assets/images/aws-ml.png';
 
 const certificatesData = [
+  {
+    image: awsml,
+    title: 'AWS Machine Learning Fundamentals',
+    institution: 'Udacity',
+    date: 'September 2025',
+    link: 'https://www.udacity.com/certificate/e/b52290a0-2936-11f0-bf70-6f1b25af29a8',
+    category: 'Machine Learning',
+    skills: ['PyTorch', 'Neural Networks', 'computer vision', 'AWS SageMaker'],
+    color: '#4ECDC4',
+  },
   {
     image: zindi,
     title: 'Togo Fiber Optics Uptake Prediction Challenge',
