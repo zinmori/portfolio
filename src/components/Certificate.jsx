@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 const Certificate = ({ image, title, institution, date, link }) => {
@@ -54,3 +56,4 @@ const Certificate = ({ image, title, institution, date, link }) => {
 };
 
 export default Certificate;
+

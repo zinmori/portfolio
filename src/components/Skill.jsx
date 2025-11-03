@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
@@ -34,3 +36,4 @@ const Skill = ({ skill, percentage }) => {
 };
 
 export default Skill;
+

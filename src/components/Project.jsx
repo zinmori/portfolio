@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaCode } from 'react-icons/fa';
@@ -54,3 +56,4 @@ const Project = ({ title, imageUrl, projectLink, projectCodeLink }) => {
 };
 
 export default Project;
+

@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import {
   FaHeart,
@@ -202,3 +204,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

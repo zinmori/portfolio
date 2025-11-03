@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
@@ -60,3 +62,4 @@ const ConnectBtn = ({ Icon, link }) => {
 };
 
 export default ConnectBtn;
+

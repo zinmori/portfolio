@@ -1,3 +1,5 @@
+'use client';
+
 const Info = ({ Icon, value }) => {
   return (
     <div className="flex flex-row gap-4 items-center justify-center">
@@ -8,3 +10,4 @@ const Info = ({ Icon, value }) => {
 };
 
 export default Info;
+

@@ -1,3 +1,5 @@
+'use client';
+
 const Tab = ({ caption, onSelect, isSelected }) => {
   return (
     <button
@@ -12,3 +14,4 @@ const Tab = ({ caption, onSelect, isSelected }) => {
 };
 
 export default Tab;
+
