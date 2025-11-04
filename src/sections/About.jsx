@@ -3,18 +3,6 @@
 import { motion } from 'framer-motion';
 
 export default function About() {
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
     <section id="about" className="section-padding  relative overflow-hidden">
       {/* Background decorative elements */}
