@@ -1,11 +1,11 @@
 # Portfolio - Ezechiel AGBAN
 
-Portfolio personnel migré de Vite + React vers Next.js 16
+Portfolio personnel migré de Vite + React vers Next.js 15
 
 ## 🚀 Technologies utilisées
 
-- **Next.js 16** - Framework React avec App Router
-- **React 19** - Bibliothèque UI
+- **Next.js 15** - Framework React avec App Router
+- **React 18** - Bibliothèque UI
 - **Tailwind CSS** - Framework CSS utility-first
 - **Framer Motion** - Animations et transitions
 - **EmailJS** - Service d'envoi d'emails
