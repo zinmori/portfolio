@@ -30,7 +30,7 @@ import {
   SiDocker,
   SiPostman,
   SiFigma,
-  SiAmazonaws,
+  SiAmazonwebservices,
   SiJupyter,
   SiVercel,
 } from 'react-icons/si';
@@ -96,7 +96,7 @@ const skillsData = [
     skills: [
       { name: 'Git/GitHub', color: '#F05032', icon: SiGit },
       { name: 'Docker', color: '#2496ED', icon: SiDocker },
-      { name: 'AWS', color: '#FF9900', icon: SiAmazonaws },
+      { name: 'AWS', color: '#FF9900', icon: SiAmazonwebservices },
       { name: 'Vercel', color: '#000000', icon: SiVercel },
       { name: 'Postman', color: '#FF6C37', icon: SiPostman },
       { name: 'Figma', color: '#F24E1E', icon: SiFigma },
@@ -296,4 +296,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
