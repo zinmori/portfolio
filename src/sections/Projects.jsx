@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
@@ -34,149 +34,6 @@ import {
   SiPytorch,
 } from 'react-icons/si';
 
-const projectsData = [
-  {
-    imgUrl: '/images/snake.png',
-    title: 'Snake Game AI Agent',
-    description:
-      'Reinforcement learning project where an AI agent learns to play the classic Snake game using deep Q-learning algorithms, achieving optimal gameplay through trial and error.',
-    projectCodeLink: 'https://github.com/zinmori/snake_ai',
-    projectLink: 'https://snakeaiz.streamlit.app/',
-    category: 'Data Science',
-    technologies: [
-      'Python',
-      'PyTorch',
-      'Reinforcement Learning',
-      'Deep Q-Learning',
-    ],
-    tags: ['All', 'Data'],
-    color: '#8B5CF6',
-    featured: false,
-  },
-  {
-    imgUrl: '/images/flower.jpeg',
-    title: 'Flower Classification',
-    description:
-      'Image classification project using deep learning to identify different species of flowers with high accuracy.',
-    projectCodeLink: 'https://github.com/zinmori/flowers_app',
-    projectLink: 'https://flowers-app.streamlit.app/',
-    category: 'Data Science',
-    technologies: ['Python', 'PyTorch', 'ResNet', 'CNN', 'Computer Vision'],
-    tags: ['All', 'Data'],
-    color: '#8B5CF6',
-    featured: false,
-  },
-  {
-    imgUrl: '/images/gplay.png',
-    title: 'Analysis of the Android Market on Play Store',
-    description:
-      'Comprehensive data analysis of Android apps on Google Play Store, exploring market trends, user ratings, and app categories using Python and data science techniques.',
-    projectCodeLink:
-      'https://app.datacamp.com/workspace/w/e7057801-47eb-4ca8-b549-916dd6740ae3/edit',
-    category: 'Data Science',
-    technologies: ['Python', 'Pandas', 'Matplotlib', 'Seaborn'],
-    tags: ['All', 'Data'],
-    color: '#FF6B6B',
-    featured: false,
-  },
-  {
-    imgUrl: '/images/co2Afr.png',
-    title: 'Analysis of the CO2 Emission in Africa',
-    description:
-      'Environmental data analysis project examining CO2 emission patterns across African countries, identifying trends and providing insights for climate action.',
-    projectCodeLink:
-      'https://app.datacamp.com/workspace/w/3fa278e9-7c61-4134-a1c9-c3604a9b87f0/edit',
-    category: 'Data Science',
-    technologies: ['Python', 'NumPy', 'Plotly', 'Jupyter'],
-    tags: ['All', 'Data'],
-    color: '#4ECDC4',
-  },
-  {
-    imgUrl: '/images/creditCard.webp',
-    title: 'Predicting Credit Card Approvals',
-    description:
-      'Machine learning project for predicting credit card approval decisions using classification algorithms and feature engineering techniques.',
-    projectCodeLink:
-      'https://app.datacamp.com/workspace/w/d42d9ccb-b97d-4fcb-a802-556f23ab3959/edit',
-    category: 'Data Science',
-    technologies: ['Python', 'Scikit-learn', 'Pandas', 'ML'],
-    tags: ['All', 'Data'],
-    color: '#45B7D1',
-    featured: false,
-  },
-  {
-    imgUrl: '/images/sps.png',
-    title: 'Blood Bank Management System',
-    description:
-      'Full-stack web application for managing blood bank operations, featuring donor registration, inventory tracking, and request management with modern UI/UX.',
-    projectLink: 'https://sps-z.vercel.app',
-    projectCodeLink: 'https://github.com/zinmori/sps_web',
-    category: 'Web Development',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-    tags: ['All', 'Web'],
-    color: '#96CEB4',
-    featured: false,
-  },
-  {
-    imgUrl: '/images/food.png',
-    title: 'Food Delivery Platform',
-    description:
-      'Modern food delivery web application with real-time ordering, payment integration, and restaurant management features built with React and Next.js.',
-    projectLink: 'https://zfood-beige.vercel.app/',
-    projectCodeLink: 'https://github.com/zinmori/zfood',
-    category: 'Web Development',
-    technologies: ['Next.js', 'React', 'Tailwind CSS', 'Firebase'],
-    tags: ['All', 'Web'],
-    color: '#FFEAA7',
-  },
-  {
-    imgUrl: '/images/term.png',
-    title: 'Terminal Portfolio',
-    description:
-      'Unique terminal-based portfolio website simulating a command-line interface, showcasing projects and skills in an interactive way.',
-    projectLink: 'https://bigz.vercel.app',
-    projectCodeLink: 'https://github.com/zinmori/terminal-portfolio',
-    category: 'Web Development',
-    technologies: ['JavaScript', 'CSS', 'HTML', 'Terminal UI'],
-    tags: ['All', 'Web'],
-    color: '#DDA0DD',
-  },
-  {
-    imgUrl: '/images/Meals.png',
-    title: 'Meal Discovery App',
-    description:
-      'Cross-platform mobile application for discovering and exploring meal recipes with detailed instructions, ingredients, and nutritional information.',
-    projectCodeLink: 'https://github.com/zinmori/meals',
-    category: 'Mobile Development',
-    technologies: ['Flutter', 'Dart', 'API Integration', 'SQLite'],
-    tags: ['All', 'Mobile'],
-    color: '#FFB74D',
-  },
-  {
-    imgUrl: '/images/spsmob.png',
-    title: 'Blood Donation Mobile App',
-    description:
-      'Mobile companion app for the blood bank system, enabling donors to schedule appointments, track donations, and receive notifications.',
-    projectCodeLink: 'https://github.com/zinmori/sps_mobile',
-    category: 'Mobile Development',
-    technologies: ['Flutter', 'Dart', 'Firebase', 'Push Notifications'],
-    tags: ['All', 'Mobile'],
-    color: '#F06292',
-    featured: false,
-  },
-  {
-    imgUrl: '/images/muzik.png',
-    title: 'Music Player App',
-    description:
-      'Feature-rich music player application with playlist management, audio visualization, and modern UI design built with Flutter.',
-    projectCodeLink: 'https://github.com/zinmori/muzic',
-    category: 'Mobile Development',
-    technologies: ['Flutter', 'Dart', 'Audio APIs', 'State Management'],
-    tags: ['All', 'Mobile'],
-    color: '#BA68C8',
-  },
-];
-
 const filterOptions = [
   { label: 'All Projects', value: 'All', icon: FaCode },
   { label: 'Data Science & AI', value: 'Data', icon: FaPython },
@@ -186,7 +43,34 @@ const filterOptions = [
 
 export default function Projects() {
   const [selectedFilter, setSelectedFilter] = useState('All');
-  const [filteredProjects, setFilteredProjects] = useState(projectsData);
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch('/api/projects');
+        if (res.ok) {
+          const data = await res.json();
+          const mappedData = data.map((p) => ({
+            ...p,
+            imgUrl: p.image,
+            projectLink: p.demoUrl,
+            projectCodeLink: p.repoUrl,
+          }));
+          setProjects(mappedData);
+          setFilteredProjects(mappedData);
+        }
+      } catch (error) {
+        console.error('Failed to fetch projects', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const [ref, inView] = useInView({
     // threshold: 0.1,
@@ -219,10 +103,10 @@ export default function Projects() {
   const filterProjects = (filter) => {
     setSelectedFilter(filter);
     if (filter === 'All') {
-      setFilteredProjects(projectsData);
+      setFilteredProjects(projects);
     } else {
       setFilteredProjects(
-        projectsData.filter((project) => project.tags.includes(filter)),
+        projects.filter((project) => project.tags.includes(filter)),
       );
     }
   };

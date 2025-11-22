@@ -85,7 +85,7 @@ export default function Home() {
                 </span>{' '}
                 and{' '}
                 <span className="text-secondary-400 font-medium">
-                  Software developer
+                  Software Engineer
                 </span>{' '}
                 crafting digital experiences that make a difference.
               </motion.p>

@@ -1,55 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function About() {
   return (
     <section id="about" className="section-padding  relative overflow-hidden">
-      {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 -left-20 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-20 w-60 h-60 bg-secondary-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
       <div className="section-container grid lg:grid-cols-2 gap-16 items-center">
         {/* Left side - Image */}
-        {/* <motion.div variants={itemVariants} className="relative group"> */}
         <motion.div
           className="relative overflow-hidden rounded-2xl"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Decorative frame */}
-          {/* <div className="absolute -inset-4 bg-gradient-primary/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div> */}
-
           {/* Image container */}
           <div className="relative glass-effect rounded-2xl p-2">
-            <img
-              src={'/images/hero.webp'}
-              alt="About Ezechiel"
-              className="w-full h-96 object-cover rounded-xl shadow-2xl"
-            />
+            <div className="relative w-full h-96">
+              <Image
+                src="/images/hero.webp"
+                alt="About Ezechiel"
+                fill
+                className="object-cover rounded-xl shadow-2xl"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
 
             {/* Overlay gradient */}
             <div className="absolute inset-2 rounded-xl bg-gradient-to-t from-dark-900/50 via-transparent to-transparent"></div>

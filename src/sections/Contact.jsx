@@ -155,34 +155,6 @@ export default function Contact() {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-dark/20"></div>
 
-      {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 -left-40 w-80 h-80 bg-primary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 -right-40 w-96 h-96 bg-secondary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1.4, 1, 1.4],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -192,12 +164,6 @@ export default function Contact() {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          {/* <motion.p
-            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
-            variants={itemVariants}
-          >
-            &lt;get_in_touch&gt;
-          </motion.p> */}
 
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
@@ -214,12 +180,6 @@ export default function Contact() {
             discuss how we can bring your ideas to life.
           </motion.p>
 
-          {/* <motion.p
-            className="text-primary-400 font-mono mt-4"
-            variants={itemVariants}
-          >
-            &lt;/get_in_touch&gt;
-          </motion.p> */}
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -517,35 +477,6 @@ export default function Contact() {
                 sharing insights about technology and development.
               </p>
             </motion.div>
-
-            {/* Availability Status */}
-            {/* <motion.div
-              className="glass-effect rounded-xl p-6 border border-white/10"
-              variants={itemVariants}
-            >
-              <div className="flex items-center space-x-3 mb-4">
-                <motion.div
-                  className="w-3 h-3 bg-green-500 rounded-full"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [1, 0.7, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-                <span className="text-white font-semibold">
-                  Available for work
-                </span>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                I&apos;m currently available for freelance projects and
-                full-time opportunities. Let&apos;s build something amazing
-                together!
-              </p>
-            </motion.div> */}
           </motion.div>
         </div>
       </motion.div>

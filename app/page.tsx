@@ -2,21 +2,21 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Ezechiel Kokou Agban - Choose Your Experience',
+  title: 'Ezechiel Kokou Agban - Data Scientist & Software Developer',
   description:
-    'Sélectionnez entre une interface graphique moderne et un mode terminal interactif pour découvrir le portfolio de BigZ.',
+    'Portfolio de Ezechiel Kokou Agban (BigZ), Data Scientist et développeur full-stack basé au Togo. Spécialisé en Machine Learning, Deep Learning et développement web avec React, Next.js, Python et JavaScript.',
   openGraph: {
-    title: 'Ezechiel Kokou Agban - Choose Your Experience',
+    title: 'Ezechiel Kokou Agban - Data Scientist & Software Developer',
     description:
-      'Choisissez entre une interface moderne ou un terminal interactif pour explorer le portfolio.',
+      "Data Scientist et développeur full-stack passionné par l'IA, le Machine Learning et la création de solutions innovantes. Découvrez mes projets et compétences.",
     type: 'website',
     url: 'https://ezechiel.bigz.dev/',
     images: [
       {
-        url: 'https://ezechiel.bigz.dev/ezechiel.jpg',
+        url: 'https://ezechiel.bigz.dev/profil.jpg',
         width: 1200,
         height: 630,
-        alt: 'Portrait de Ezechiel Kokou Agban',
+        alt: 'Ezechiel Kokou Agban - Data Scientist & Software Developer',
       },
     ],
   },
@@ -28,9 +28,23 @@ const structuredData = {
   name: 'Ezechiel Kokou Agban',
   jobTitle: 'Data Scientist & Software Developer',
   url: 'https://ezechiel.bigz.dev/',
+  image: 'https://ezechiel.bigz.dev/profil.jpg',
+  description:
+    'Data Scientist et développeur full-stack spécialisé en Machine Learning, Deep Learning et développement web moderne.',
   sameAs: [
     'https://linkedin.com/in/kokou-ezechiel-agban',
     'https://github.com/zinmori',
+  ],
+  knowsAbout: [
+    'Machine Learning',
+    'Deep Learning',
+    'Data Science',
+    'Python',
+    'JavaScript',
+    'React',
+    'Next.js',
+    'TensorFlow',
+    'PyTorch',
   ],
 };
 

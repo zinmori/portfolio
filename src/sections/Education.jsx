@@ -1,53 +1,50 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
   FaGraduationCap,
   FaCalendarAlt,
   FaMapMarkerAlt,
-  // FaAward,
   FaBook,
 } from 'react-icons/fa';
 
-const educationData = [
-  {
-    degree: 'Bachelor in Software Engineering',
-    institution: 'Ecole Polytechnique de Lomé - Universite de Lomé',
-    period: '2021 - 2024',
-    location: 'Lomé, Togo',
-    description:
-      'Comprehensive program covering software development, algorithms, data structures, database management, and software engineering principles.',
-    highlights: [
-      'Software Development Methodologies',
-      'Database Design & Management',
-      'Object-Oriented Programming',
-      'Data Structures & Algorithms',
-      'Web Development',
-      'Calculus and Linear Algebra',
-    ],
-    color: '#22c55e',
-  },
-  // {
-  //   degree: 'High School Diploma',
-  //   institution: 'Lycée Scientifique de Lomé',
-  //   period: '2018 - 2021',
-  //   location: 'Lomé, Togo',
-  //   description:
-  //     'Scientific track with specialization in Mathematics and Physics, providing a strong foundation in analytical thinking and problem-solving.',
-  //   highlights: [
-  //     'Advanced Mathematics',
-  //     'Physics & Chemistry',
-  //     'Computer Science Fundamentals',
-  //     'English & French Proficiency',
-  //     'Scientific Research Methods',
-  //   ],
-  //   specialty: 'Mathematics and Physics',
-  //   color: '#0891b2',
-  // },
-];
-
 const Education = () => {
+  const [education, setEducation] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEducation = async () => {
+      try {
+        const res = await fetch('/api/education');
+        if (res.ok) {
+          const data = await res.json();
+          const mappedData = data.map((edu) => ({
+            ...edu,
+            period: formatPeriod(edu.startDate, edu.endDate, edu.current),
+            specialty: edu.fieldOfStudy,
+          }));
+          setEducation(mappedData);
+        }
+      } catch (error) {
+        console.error('Failed to fetch education', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEducation();
+  }, []);
+
+  const formatPeriod = (start, end, current) => {
+    const startYear = new Date(start).getFullYear();
+    if (current) return `${startYear} - Present`;
+    if (!end) return `${startYear}`;
+    const endYear = new Date(end).getFullYear();
+    return `${startYear} - ${endYear}`;
+  };
+
   const [ref, inView] = useInView({
     // threshold: 0.1,
     triggerOnce: true,
@@ -81,34 +78,6 @@ const Education = () => {
       id="education"
       className="section-padding relative overflow-hidden"
     >
-      {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-32 w-80 h-80 bg-secondary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -118,13 +87,6 @@ const Education = () => {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          {/* <motion.p
-            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
-            variants={itemVariants}
-          >
-            &lt;education&gt;
-          </motion.p> */}
-
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
             variants={itemVariants}
@@ -140,13 +102,6 @@ const Education = () => {
             provided the technical knowledge that drives my passion for
             innovation.
           </motion.p>
-
-          {/* <motion.p
-            className="text-primary-400 font-mono mt-4"
-            variants={itemVariants}
-          >
-            &lt;/education&gt;
-          </motion.p> */}
         </motion.div>
 
         {/* Education Timeline */}
@@ -155,7 +110,7 @@ const Education = () => {
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-primary-500 hidden md:block" />
 
           <div className="space-y-12">
-            {educationData.map((edu, index) => (
+            {education.map((edu, index) => (
               <motion.div
                 key={edu.degree}
                 variants={itemVariants}
@@ -281,63 +236,9 @@ const Education = () => {
             ))}
           </div>
         </div>
-
-        {/* Bottom stats */}
-        {/* <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-          variants={itemVariants}
-        >
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">3+</div>
-            <p className="text-gray-300 font-medium">Years of Studies</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">15.5/20</div>
-            <p className="text-gray-300 font-medium">Bachelor GPA</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">2024</div>
-            <p className="text-gray-300 font-medium">Graduation Year</p>
-          </motion.div>
-        </motion.div> */}
-
-        {/* Call to action */}
-        {/* <motion.div className="text-center mt-16" variants={itemVariants}>
-          <motion.p
-            className="text-gray-300 text-lg mb-8"
-            variants={itemVariants}
-          >
-            Want to see how I apply my education in real projects?
-          </motion.p>
-
-          <motion.a
-            href="#experience"
-            className="btn-primary inline-flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>View My Experience</span>
-            <span>💼</span>
-          </motion.a>
-        </motion.div> */}
       </motion.div>
     </section>
   );
 };
 
 export default Education;
-

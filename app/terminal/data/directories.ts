@@ -5,7 +5,8 @@ export type DirectoryKey =
   | 'projects'
   | 'skills'
   | 'links'
-  | 'languages';
+  | 'languages'
+  | 'blog';
 
 export const directoryOrder: DirectoryKey[] = [
   'experience',
@@ -15,6 +16,7 @@ export const directoryOrder: DirectoryKey[] = [
   'skills',
   'links',
   'languages',
+  'blog',
 ];
 
 export const directoryIcons: Record<DirectoryKey, string> = {
@@ -25,9 +27,11 @@ export const directoryIcons: Record<DirectoryKey, string> = {
   skills: '⚡',
   links: '🔗',
   languages: '🌍',
+  blog: '📝',
 };
 
 export const directories: Record<DirectoryKey, string[]> = {
+  blog: ['Loading posts...'],
   experience: [
     '💼 Professional Experience',
     '──────────────────────────────────────────────',

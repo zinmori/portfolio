@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/normal';
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,31 +45,43 @@ export default function Navbar() {
     { href: '#education', label: 'Education' },
     { href: '#projects', label: 'Projects' },
     { href: '#contact', label: 'Contact' },
+    { href: '/normal/blog', label: 'Blog', isPage: true },
   ];
+
+  const getHref = (item) => {
+    if (item.isPage) return item.href;
+    return isHomePage ? item.href : `/normal${item.href}`;
+  };
 
   const NavLinks = ({ mobile = false }) => (
     <>
       {navItems.map((item, index) => (
-        <motion.a
+        <Link
           key={item.href}
+          href={getHref(item)}
           onClick={mobile ? handleToggleMenu : undefined}
-          href={item.href}
-          className="relative group text-white hover:text-primary-400 transition-colors duration-300 smooth-scroll font-medium"
-          initial={mobile ? { opacity: 0, x: -20 } : {}}
-          animate={mobile ? { opacity: 1, x: 0 } : {}}
-          transition={mobile ? { delay: index * 0.1 } : {}}
-          whileHover={{ y: -2 }}
+          className={`relative group text-white hover:text-primary-400 transition-colors duration-300 ${
+            !item.isPage ? 'smooth-scroll' : ''
+          } font-medium cursor-pointer block`}
         >
-          {item.label}
-          <motion.div
-            className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300"
-            layoutId={
-              mobile
-                ? `mobile-underline-${item.href}`
-                : `desktop-underline-${item.href}`
-            }
-          />
-        </motion.a>
+          <motion.span
+            className="block"
+            initial={mobile ? { opacity: 0, x: -20 } : {}}
+            animate={mobile ? { opacity: 1, x: 0 } : {}}
+            transition={mobile ? { delay: index * 0.1 } : {}}
+            whileHover={{ y: -2 }}
+          >
+            {item.label}
+            <motion.div
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300"
+              layoutId={
+                mobile
+                  ? `mobile-underline-${item.href}`
+                  : `desktop-underline-${item.href}`
+              }
+            />
+          </motion.span>
+        </Link>
       ))}
     </>
   );
@@ -81,30 +97,34 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <motion.a
-          href="#home"
-          className="flex items-center space-x-2 group"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <Link
+          href="/normal"
+          className="flex items-center space-x-2 group cursor-pointer"
         >
           <motion.div
-            className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="text-primary font-bold text-xl font-display">
-              Z
-            </span>
+            <motion.div
+              className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-primary-500 font-bold text-xl font-display">
+                Z
+              </span>
+            </motion.div>
+            <motion.span
+              className="hidden sm:block text-xl font-display font-bold text-white group-hover:text-primary-400 transition-colors"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Ezechiel
+            </motion.span>
           </motion.div>
-          <motion.span
-            className="hidden sm:block text-xl font-display font-bold text-white group-hover:text-primary-400 transition-colors"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Ezechiel
-          </motion.span>
-        </motion.a>
+        </Link>
 
         {/* Desktop Navigation */}
         {!isMobile && (
@@ -179,15 +199,19 @@ export default function Navbar() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
                   >
-                    <motion.a
-                      href="#contact"
-                      className="btn-primary w-full text-center"
+                    <Link
+                      href={isHomePage ? '#contact' : '/normal#contact'}
+                      className="btn-primary w-full text-center block"
                       onClick={handleToggleMenu}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
                     >
-                      Get In Touch
-                    </motion.a>
+                      <motion.span
+                        className="block w-full h-full"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Get In Touch
+                      </motion.span>
+                    </Link>
                   </motion.div>
                 </div>
               </motion.nav>

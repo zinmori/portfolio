@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaCode } from 'react-icons/fa';
 import { IoEyeOutline } from 'react-icons/io5';
+import Image from 'next/image';
 
 const Project = ({ title, imageUrl, projectLink, projectCodeLink }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,7 +23,15 @@ const Project = ({ title, imageUrl, projectLink, projectCodeLink }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <img src={imageUrl} className="w-full h-64 rounded-t-lg" alt={title} />
+      <div className="relative w-full h-64">
+        <Image
+          src={imageUrl}
+          alt={title}
+          fill
+          className="object-cover rounded-t-lg"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.5 }}
@@ -56,4 +65,3 @@ const Project = ({ title, imageUrl, projectLink, projectCodeLink }) => {
 };
 
 export default Project;
-

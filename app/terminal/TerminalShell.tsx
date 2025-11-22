@@ -44,6 +44,7 @@ const commandDefinitions: readonly CommandDefinition[] = [
     usage: 'color <light|dark|ubuntu>',
   },
   { name: 'echo', description: 'Print text', usage: 'echo <text>' },
+  { name: 'cat', description: 'Read file content', usage: 'cat <file>' },
   { name: 'clear', description: 'Clear terminal output' },
   { name: 'credits', description: 'Show dependency credits' },
   { name: 'sudo', description: 'Try elevated privilege (just for fun)' },
@@ -292,6 +293,54 @@ export function TerminalShell() {
     );
   }, [pushOutput]);
 
+  const handleCat = useCallback(
+    async (args: string[]) => {
+      if (args.length === 0) {
+        pushOutput('cat: missing filename', { className: 'terminal-text' });
+        return;
+      }
+
+      const filename = args[0];
+      let slug = '';
+
+      if (cwd.endsWith('/blog')) {
+        slug = filename.replace(/\.md$/, '');
+      } else if (filename.startsWith('blog/')) {
+        slug = filename.replace(/^blog\//, '').replace(/\.md$/, '');
+      } else {
+        pushOutput(`cat: ${filename}: No such file or directory`, {
+          className: 'terminal-text',
+        });
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/posts/slug/${slug}`);
+        if (!res.ok) {
+          pushOutput(`cat: ${filename}: No such file or directory`, {
+            className: 'terminal-text',
+          });
+          return;
+        }
+        const post = await res.json();
+        pushOutput(
+          [
+            `Title: ${post.title}`,
+            `Date: ${post.date}`,
+            '----------------------------------------',
+            post.content,
+          ].join('\n'),
+          { pre: true, className: 'terminal-text' },
+        );
+      } catch (e) {
+        pushOutput(`Error reading file ${filename}`, {
+          className: 'terminal-text',
+        });
+      }
+    },
+    [cwd, pushOutput],
+  );
+
   const printDirectories = useCallback(() => {
     pushOutput(
       <div className="terminal-section">
@@ -313,13 +362,37 @@ export function TerminalShell() {
   }, [pushOutput]);
 
   const handleLs = useCallback(
-    (args: string[], currentPath: string) => {
+    async (args: string[], currentPath: string) => {
       if (args.length === 0) {
         if (currentPath === rootPath) {
           printDirectories();
           return;
         }
         const activeDir = currentPath.replace(`${rootPath}/`, '');
+
+        if (activeDir === 'blog') {
+          try {
+            const res = await fetch('/api/posts');
+            const posts = await res.json();
+            const postFiles = posts.map(
+              (p: any) => `${p.slug}.md  (${p.title})`,
+            );
+            pushOutput(
+              [
+                '📝 Blog Posts',
+                '──────────────────────────────────────────────',
+                ...postFiles,
+              ].join('\n'),
+              { pre: true, className: 'terminal-text' },
+            );
+          } catch (e) {
+            pushOutput('Failed to load blog posts.', {
+              className: 'terminal-text',
+            });
+          }
+          return;
+        }
+
         if (isDirectory(activeDir)) {
           pushOutput(directories[activeDir].join('\n'), {
             pre: true,
@@ -340,6 +413,28 @@ export function TerminalShell() {
       }
 
       const normalized = target.startsWith('~/') ? target.slice(2) : target;
+
+      if (normalized === 'blog') {
+        try {
+          const res = await fetch('/api/posts');
+          const posts = await res.json();
+          const postFiles = posts.map((p: any) => `${p.slug}.md  (${p.title})`);
+          pushOutput(
+            [
+              '📝 Blog Posts',
+              '──────────────────────────────────────────────',
+              ...postFiles,
+            ].join('\n'),
+            { pre: true, className: 'terminal-text' },
+          );
+        } catch (e) {
+          pushOutput('Failed to load blog posts.', {
+            className: 'terminal-text',
+          });
+        }
+        return;
+      }
+
       if (isDirectory(normalized)) {
         pushOutput(directories[normalized].join('\n'), {
           pre: true,
@@ -624,6 +719,9 @@ export function TerminalShell() {
         case 'echo':
           handleEcho(args);
           break;
+        case 'cat':
+          await handleCat(args);
+          break;
         case 'clear':
           handleClear();
           break;
@@ -654,6 +752,7 @@ export function TerminalShell() {
       cwd,
       handleAbout,
       handleCd,
+      handleCat,
       handleClear,
       handleColor,
       handleContact,

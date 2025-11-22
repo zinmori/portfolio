@@ -1,127 +1,68 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
-  //   FaBriefcase,
+  FaBriefcase,
   FaCalendarAlt,
   FaMapMarkerAlt,
   FaCode,
   FaLaptopCode,
-  //   FaUsers,
   FaProjectDiagram,
   FaRocket,
 } from 'react-icons/fa';
 
-const experienceData = [
-  {
-    title: 'Data Analyst/Scientist',
-    company: 'Togo Data Lab - Ministry of Digital Economy and Transformation',
-    type: 'Full-time',
-    period: 'December 2024 - Present',
-    location: 'Lomé, Togo',
-    description:
-      'Specializing in satellite imagery analysis and machine learning applications for environmental monitoring and climate data analysis.',
-    achievements: [
-      'Trained in MOSAIKS (Multi-task Observation using SAtellite Imagery & Kitchen Sinks) methodology for satellite image processing',
-      'Implemented CNN kernel feature extraction from satellite imagery for machine learning tasks',
-      'Built forest monitoring system using satellite imagery to track ecosystem evolution',
-      'Analyzed deforestation patterns, reforestation areas, and carbon emission metrics',
-    ],
-    technologies: [
-      'Python',
-      'PyTorch',
-      'Scikit-learn',
-      'Satellite Imagery',
-      'CNN',
-      'MOSAIKS',
-      'Google Earth Engine',
-      'Remote Sensing',
-      'Pandas',
-      'NumPy',
-    ],
-    color: '#f093fb',
-    icon: FaProjectDiagram,
-  },
-  {
-    title: 'Course material Tester',
-    company: 'Deeplearning.AI',
-    type: 'Volunteer',
-    period: 'April 2024 - Present',
-    location: 'Remote',
-    description:
-      'Testing and providing feedback on course materials for the Deep Learning Specialization, ensuring high-quality educational content.',
-    achievements: [
-      'Reviewed and tested course materials for accuracy and clarity',
-      'Provided constructive feedback to improve course content',
-      'Collaborated with course developers to enhance learning experience',
-    ],
-    technologies: [
-      'Python',
-      'PyTorch',
-      'Jupyter Notebooks',
-      'GitHub',
-      'Markdown',
-    ],
-    color: '#f472b6',
-    icon: FaLaptopCode,
-  },
-
-  {
-    title: 'Full Stack Developer Intern',
-    company: 'Mitsio Motu',
-    type: 'Internship',
-    period: 'July 2024 - December 2024',
-    location: 'Lomé, Togo',
-    description:
-      'Contributed to the development of a national portal for supporting the startup ecosystem in Togo, creating a platform to connect entrepreneurs, investors, and support organizations.',
-    achievements: [
-      'Developed frontend components for the startup ecosystem portal using React.js',
-      'Built backend APIs and services using Django framework',
-      'Created features for startup profile management and showcase',
-      'Containerized application using Docker for consistent deployment',
-    ],
-    technologies: [
-      'React',
-      'Django',
-      'JavaScript',
-      'Python',
-      'Docker',
-      'Git',
-      'REST APIs',
-    ],
-    color: '#16a34a',
-    icon: FaCode,
-  },
-  {
-    title: 'Full Stack Developer',
-    company: 'Freelance',
-    type: 'Remote',
-    period: 'January 2023 - Present',
-    location: 'Remote',
-    description:
-      'Developing custom web and mobile applications for various clients, focusing on modern technologies and user-centered design.',
-    achievements: [
-      'Built restaurant management system with mobile and web applications for order and menu management',
-      'Developed real-time order tracking and notification system for restaurant staff',
-      'Developed mobile applications using Flutter/Dart for cross-platform compatibility',
-      'Integrated various databases including MongoDB and PostgreSQL',
-    ],
-    technologies: [
-      'React',
-      'Next.js',
-      'Node.js',
-      'Flutter',
-      'MongoDB',
-      'PostgreSQL',
-      'Firebase',
-    ],
-    color: '#22c55e',
-    icon: FaLaptopCode,
-  },
-];
-
 const Experience = () => {
+  const [experience, setExperience] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchExperience = async () => {
+      try {
+        const res = await fetch('/api/experience');
+        if (res.ok) {
+          const data = await res.json();
+          const mappedData = data.map((exp) => ({
+            ...exp,
+            title: exp.position,
+            technologies: exp.skills,
+            period: formatPeriod(exp.startDate, exp.endDate, exp.current),
+            icon: getIconForExperience(exp.position),
+          }));
+          setExperience(mappedData);
+        }
+      } catch (error) {
+        console.error('Failed to fetch experience', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExperience();
+  }, []);
+
+  const formatPeriod = (start, end, current) => {
+    const startDate = new Date(start).toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric',
+    });
+    if (current) return `${startDate} - Present`;
+    if (!end) return startDate;
+    const endDate = new Date(end).toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric',
+    });
+    return `${startDate} - ${endDate}`;
+  };
+
+  const getIconForExperience = (title) => {
+    if (title.includes('Data')) return FaProjectDiagram;
+    if (title.includes('Full Stack')) return FaCode;
+    if (title.includes('Tester')) return FaLaptopCode;
+    return FaBriefcase;
+  };
+
   const [ref, inView] = useInView({
     // threshold: 0.1,
     triggerOnce: true,
@@ -155,34 +96,6 @@ const Experience = () => {
       id="experience"
       className="section-padding relative overflow-hidden"
     >
-      {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/3 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-32 w-80 h-80 bg-secondary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1.4, 1, 1.4],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -192,13 +105,6 @@ const Experience = () => {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          {/* <motion.p
-            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
-            variants={itemVariants}
-          >
-            &lt;experience&gt;
-          </motion.p> */}
-
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
             variants={itemVariants}
@@ -213,13 +119,6 @@ const Experience = () => {
             From academic projects to real-world applications, here&apos;s how
             I&apos;ve been applying my skills and growing as a developer.
           </motion.p>
-
-          {/* <motion.p
-            className="text-primary-400 font-mono mt-4"
-            variants={itemVariants}
-          >
-            &lt;/experience&gt;
-          </motion.p> */}
         </motion.div>
 
         {/* Experience Timeline */}
@@ -228,7 +127,7 @@ const Experience = () => {
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-primary-500 hidden md:block" />
 
           <div className="space-y-12">
-            {experienceData.map((exp, index) => (
+            {experience.map((exp, index) => (
               <motion.div
                 key={`${exp.company}-${exp.title}`}
                 variants={itemVariants}
@@ -388,73 +287,9 @@ const Experience = () => {
             ))}
           </div>
         </div>
-
-        {/* Bottom stats */}
-        {/* <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6"
-          variants={itemVariants}
-        >
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">2+</div>
-            <p className="text-gray-300 font-medium">Years Experience</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">15+</div>
-            <p className="text-gray-300 font-medium">Projects Completed</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">5+</div>
-            <p className="text-gray-300 font-medium">Technologies Mastered</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">100%</div>
-            <p className="text-gray-300 font-medium">Client Satisfaction</p>
-          </motion.div>
-        </motion.div> */}
-
-        {/* Call to action */}
-        {/* <motion.div className="text-center mt-16" variants={itemVariants}>
-          <motion.p
-            className="text-gray-300 text-lg mb-8"
-            variants={itemVariants}
-          >
-            Ready to add your project to my experience? Let&apos;s work
-            together!
-          </motion.p>
-
-          <motion.a
-            href="#contact"
-            className="btn-primary inline-flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>Start a Project</span>
-            <span>🚀</span>
-          </motion.a>
-        </motion.div> */}
       </motion.div>
     </section>
   );
 };
 
 export default Experience;
-

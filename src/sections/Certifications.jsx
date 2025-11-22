@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 import {
   FaExternalLinkAlt,
   FaAward,
@@ -9,107 +11,34 @@ import {
   FaGraduationCap,
 } from 'react-icons/fa';
 
-const certificatesData = [
-  {
-    image: '/images/aws-ml.png',
-    title: 'AWS Machine Learning Fundamentals',
-    institution: 'Udacity',
-    date: 'September 2025',
-    link: 'https://www.udacity.com/certificate/e/b52290a0-2936-11f0-bf70-6f1b25af29a8',
-    category: 'Machine Learning',
-    skills: ['PyTorch', 'Neural Networks', 'computer vision', 'AWS SageMaker'],
-    color: '#4ECDC4',
-  },
-  {
-    image: '/images/zindi.png',
-    title: 'Togo Fiber Optics Uptake Prediction Challenge',
-    institution: 'Zindi',
-    date: 'June 2024',
-    link: 'https://zindi.africa/competitions/togo-fiber-optics-uptake-prediction-challenge?referrer=BigZ',
-    category: 'Machine Learning',
-    skills: [
-      'Python',
-      'NumPy',
-      'Pandas',
-      'Scikit-learn',
-      'XGBoost',
-      'LightGBM',
-    ],
-    color: '#4ECDC4',
-  },
-  {
-    image: '/images/genai.png',
-    title: 'Foundation of Generative AI',
-    institution: 'Udacity',
-    date: 'January 2025',
-    link: 'https://www.udacity.com/certificate/e/e161a868-b7bc-11ef-8935-c31b4b6f030b',
-    category: 'Artificial Intelligence',
-    skills: ['Python', 'NumPy', 'Pandas', 'PyTorch'],
-    color: '#FF6B6B',
-  },
-  {
-    image: '/images/ia.png',
-    title: 'AI Programming with Python',
-    institution: 'Udacity',
-    date: 'September 2024',
-    link: 'https://www.udacity.com/certificate/e/9d70472c-2dce-11ef-aa1f-d3a47e90255f',
-    category: 'Artificial Intelligence',
-    skills: ['Python', 'NumPy', 'Pandas', 'PyTorch'],
-    color: '#FF6B6B',
-  },
-  {
-    image: '/images/data.png',
-    title: 'Associate Data Scientist',
-    institution: 'DataCamp',
-    date: 'September 2023',
-    link: 'https://www.datacamp.com/certificate/DSA0019605927685',
-    category: 'Data Science',
-    skills: ['Python', 'SQL', 'Statistics', 'Machine Learning'],
-    color: '#4ECDC4',
-  },
-  {
-    image: '/images/mlspe.png',
-    title: 'Machine Learning Specialization',
-    institution: 'Coursera',
-    date: 'April 2024',
-    link: 'https://coursera.org/verify/specialization/2RUCU48RMPBY',
-    category: 'Machine Learning',
-    skills: ['TensorFlow', 'Scikit-learn', 'Deep Learning', 'Neural Networks'],
-    color: '#45B7D1',
-  },
-  {
-    image: '/images/fluttercertificate.jpg',
-    title: 'Flutter & Dart',
-    institution: 'Udemy',
-    date: 'October 2023',
-    link: 'https://www.udemy.com/certificate/UC-18077573-e617-42d6-8b7a-8f2d8d70a0cf/',
-    category: 'Mobile Development',
-    skills: ['Flutter', 'Dart', 'Mobile UI', 'State Management'],
-    color: '#96CEB4',
-  },
-  {
-    image: '/images/react.png',
-    title: 'React JS',
-    institution: 'OpenClassrooms',
-    date: 'September 2023',
-    link: 'https://openclassrooms.com/fr/course-certificates/8609343030',
-    category: 'Frontend Development',
-    skills: ['React', 'JSX', 'Hooks', 'Component Architecture'],
-    color: '#FFEAA7',
-  },
-  {
-    image: '/images/node.png',
-    title: 'Node JS/Express',
-    institution: 'OpenClassrooms',
-    date: 'October 2023',
-    link: 'https://openclassrooms.com/fr/course-certificates/4249712619',
-    category: 'Backend Development',
-    skills: ['Node.js', 'Express', 'RESTful APIs', 'Database Integration'],
-    color: '#DDA0DD',
-  },
-];
-
 const Certifications = () => {
+  const [certificates, setCertificates] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      try {
+        const res = await fetch('/api/certificates');
+        if (res.ok) {
+          const data = await res.json();
+          setCertificates(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch certificates', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCertificates();
+  }, []);
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  };
+
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -143,34 +72,6 @@ const Certifications = () => {
       id="certifications"
       className="section-padding relative overflow-hidden"
     >
-      {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/3 -left-32 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-32 w-80 h-80 bg-secondary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -180,13 +81,6 @@ const Certifications = () => {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          {/* <motion.p
-            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
-            variants={itemVariants}
-          >
-            &lt;certifications&gt;
-          </motion.p> */}
-
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
             variants={itemVariants}
@@ -202,20 +96,13 @@ const Certifications = () => {
             certifications that have shaped my expertise and fueled my passion
             for technology.
           </motion.p>
-
-          {/* <motion.p
-            className="text-primary-400 font-mono mt-4"
-            variants={itemVariants}
-          >
-            &lt;/certifications&gt;
-          </motion.p> */}
         </motion.div>
 
         {/* Certifications grid */}
         <div className="grid lg:grid-cols-2 gap-8">
-          {certificatesData.map((certificate, index) => (
+          {certificates.map((certificate, index) => (
             <motion.div
-              key={certificate.title}
+              key={certificate._id || certificate.title}
               variants={itemVariants}
               className="group relative"
             >
@@ -231,11 +118,13 @@ const Certifications = () => {
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="w-20 h-20 rounded-xl overflow-hidden border-2 border-white/20">
-                      <img
+                    <div className="relative w-20 h-20 rounded-xl overflow-hidden border-2 border-white/20">
+                      <Image
                         src={certificate.image}
                         alt={certificate.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="80px"
                       />
                     </div>
                     <motion.div
@@ -266,7 +155,9 @@ const Certifications = () => {
                     </div>
                     <div className="flex items-center space-x-2 text-gray-400">
                       <FaCalendarAlt className="text-sm" />
-                      <span className="text-sm">{certificate.date}</span>
+                      <span className="text-sm">
+                        {formatDate(certificate.date)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -345,67 +236,6 @@ const Certifications = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom stats */}
-        {/* <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-          variants={itemVariants}
-        >
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className="text-3xl font-bold text-gradient mb-2"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              6+
-            </motion.div>
-            <p className="text-gray-300 font-medium">Certifications Earned</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">4</div>
-            <p className="text-gray-300 font-medium">Technology Areas</p>
-          </motion.div>
-
-          <motion.div
-            className="text-center glass-effect rounded-xl p-6 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl font-bold text-gradient mb-2">2024</div>
-            <p className="text-gray-300 font-medium">Latest Achievement</p>
-          </motion.div>
-        </motion.div> */}
-
-        {/* Call to action */}
-        {/* <motion.div className="text-center mt-16" variants={itemVariants}>
-          <motion.p
-            className="text-gray-300 text-lg mb-8"
-            variants={itemVariants}
-          >
-            Want to see my practical applications of these skills?
-          </motion.p>
-
-          <motion.a
-            href="#projects"
-            className="btn-primary inline-flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>View My Projects</span>
-            <span>🚀</span>
-          </motion.a>
-        </motion.div> */}
       </motion.div>
     </section>
   );

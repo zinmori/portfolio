@@ -147,33 +147,6 @@ const Skills = () => {
   return (
     <section id="skills" className="section-padding relative overflow-hidden">
       {/* Background decorative elements */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-10 left-10 w-32 h-32 bg-primary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-20 w-40 h-40 bg-secondary-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1.5, 1, 1.5],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div> */}
-
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -183,13 +156,6 @@ const Skills = () => {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={categoryVariants}>
-          {/* <motion.p
-            className="text-primary-400 font-mono text-lg tracking-wide mb-4"
-            variants={categoryVariants}
-          >
-            &lt;skills&gt;
-          </motion.p> */}
-
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
             variants={categoryVariants}
@@ -204,13 +170,6 @@ const Skills = () => {
             I love working with cutting-edge technologies and constantly
             expanding my skill set. Here&apos;s what I bring to the table.
           </motion.p>
-
-          {/* <motion.p
-            className="text-primary-400 font-mono mt-4"
-            variants={categoryVariants}
-          >
-            &lt;/skills&gt;
-          </motion.p> */}
         </motion.div>
 
         {/* Skills grid */}
@@ -270,26 +229,6 @@ const Skills = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom CTA */}
-        {/* <motion.div className="text-center mt-16" variants={categoryVariants}>
-          <motion.p
-            className="text-gray-300 text-lg mb-8"
-            variants={categoryVariants}
-          >
-            Interested in working together? Let&apos;s build something amazing!
-          </motion.p>
-
-          <motion.a
-            href="#contact"
-            className="btn-primary inline-flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>Start a Project</span>
-            <span>✨</span>
-          </motion.a>
-        </motion.div> */}
       </motion.div>
     </section>
   );
