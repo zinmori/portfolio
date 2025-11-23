@@ -11,15 +11,18 @@ export function ModeSwitchButton() {
   const router = useRouter();
   const [isGlitching, setIsGlitching] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [targetMode, setTargetMode] = useState('normal');
 
   const handleSwitch = (target: string) => {
+    const mode = target.replace('/', '') || 'normal';
+    setTargetMode(mode);
     setIsGlitching(true);
     setIsOpen(false);
 
     setTimeout(() => {
       router.push(target);
       setTimeout(() => setIsGlitching(false), 500);
-    }, 500);
+    }, 2000);
   };
 
   const currentMode = pathname?.startsWith('/terminal')
@@ -30,7 +33,7 @@ export function ModeSwitchButton() {
 
   return (
     <>
-      <GlitchOverlay active={isGlitching} />
+      <GlitchOverlay active={isGlitching} targetMode={targetMode} />
 
       <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
         {isOpen && (

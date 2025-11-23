@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { FaDesktop, FaBook } from 'react-icons/fa';
+import { HiOutlineCommandLine } from 'react-icons/hi2';
 
 export const metadata: Metadata = {
   title: 'Ezechiel Kokou Agban - Data Scientist & Software Developer',
@@ -56,65 +58,91 @@ export default function LandingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black text-white">
-        {/* Matrix background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
-          style={{
-            backgroundImage: 'url(/images/matrix.jpg)',
-          }}
-        />
+      <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 text-white">
+        {/* Abstract background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
 
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40" />
-
-        <div className="z-10 mx-auto max-w-4xl space-y-12 px-4 text-center">
-          {/* Main title */}
-          <div className="mb-16">
-            <h1 className="bg-gradient-to-r from-blue-400 to-red-400 bg-clip-text text-5xl font-bold text-transparent md:text-7xl">
+        <div className="relative z-10 flex flex-col items-center justify-center space-y-12 p-4 text-center md:space-y-24">
+          {/* Title Section */}
+          <div className="animate-fade-in-down">
+            <h1 className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-5xl font-extrabold text-transparent drop-shadow-lg md:text-7xl">
               Choose Your Path
             </h1>
+            <p className="mt-4 text-lg text-slate-400 md:text-2xl">
+              Select an interface to explore the portfolio
+            </p>
           </div>
 
-          {/* Pills choice */}
-          <div className="flex flex-row items-center justify-center space-x-16 md:space-x-72">
-            {/* Blue Pill - Normal Mode */}
-            <Link
-              href="/normal"
-              className="group flex cursor-pointer flex-col items-center transition-transform duration-500 hover:scale-110"
-            >
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-800 p-6 shadow-2xl transition-all duration-300 hover:shadow-blue-500/70 md:h-32 md:w-32 md:p-8">
-                <div className="flex h-6 w-12 items-center justify-center rounded-full bg-blue-400 shadow-inner md:h-8 md:w-16">
-                  <div className="h-4 w-8 rounded-full bg-gradient-to-r from-blue-200 to-blue-300 md:h-6 md:w-12" />
+          {/* Triangular Layout */}
+          <div className="relative flex flex-col items-center justify-center gap-12 md:gap-0">
+            {/* Top: Interface */}
+            <div className="md:mb-16 animate-fade-in-up delay-200">
+              <Link
+                href="/normal"
+                className="group relative flex flex-col items-center"
+              >
+                <div className="relative flex h-32 w-32 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-blue-900 p-1 shadow-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-blue-500/50">
+                  <div className="flex h-full w-full items-center justify-center rounded-xl bg-slate-950/50 backdrop-blur-sm">
+                    <FaDesktop className="h-12 w-12 text-blue-400 transition-transform duration-500 group-hover:scale-110" />
+                  </div>
+                  {/* Glow */}
+                  <div className="absolute -inset-1 rounded-2xl bg-blue-500 opacity-0 blur transition-opacity duration-500 group-hover:opacity-30" />
                 </div>
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-full bg-blue-400 opacity-0 transition-opacity duration-300 group-hover:opacity-40" />
-                {/* Pulse animation */}
-                <div className="absolute inset-0 rounded-full border-4 border-blue-400 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
-              </div>
-              <p className="mt-4 text-lg font-bold text-blue-300 md:mt-6 md:text-xl">
-                Interface
-              </p>
-            </Link>
+                <h2 className="mt-4 text-xl font-bold text-blue-300 transition-colors group-hover:text-blue-200">
+                  Interface
+                </h2>
+                <p className="text-sm text-slate-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  Modern Web Experience
+                </p>
+              </Link>
+            </div>
 
-            {/* Red Pill - Terminal Mode */}
-            <Link
-              href="/terminal"
-              className="group flex cursor-pointer flex-col items-center transition-transform duration-500 hover:scale-110"
-            >
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-red-600 to-red-800 p-6 shadow-2xl transition-all duration-300 hover:shadow-red-500/70 md:h-32 md:w-32 md:p-8">
-                <div className="flex h-6 w-12 items-center justify-center rounded-full bg-red-400 shadow-inner md:h-8 md:w-16">
-                  <div className="h-4 w-8 rounded-full bg-gradient-to-r from-red-200 to-red-300 md:h-6 md:w-12" />
-                </div>
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-full bg-red-400 opacity-0 transition-opacity duration-300 group-hover:opacity-40" />
-                {/* Pulse animation */}
-                <div className="absolute inset-0 rounded-full border-4 border-red-400 opacity-0 group-hover:opacity-100 animate-ping" />
+            {/* Bottom Row */}
+            <div className="flex w-full max-w-3xl flex-col items-center justify-between gap-12 md:flex-row md:gap-32">
+              {/* Left: Terminal */}
+              <div className="animate-fade-in-up delay-300">
+                <Link
+                  href="/terminal"
+                  className="group relative flex flex-col items-center"
+                >
+                  <div className="relative flex h-32 w-32 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 to-red-900 p-1 shadow-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-red-500/50">
+                    <div className="relative flex h-full w-full items-center justify-center rounded-xl bg-slate-950/50 backdrop-blur-sm">
+                      <HiOutlineCommandLine className="h-12 w-12 text-red-400 transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    {/* Glow */}
+                    <div className="absolute -inset-1 rounded-2xl bg-red-500 opacity-0 blur transition-opacity duration-500 group-hover:opacity-30" />
+                  </div>
+                  <h2 className="mt-4 text-xl font-bold text-red-300 transition-colors group-hover:text-red-200">
+                    Terminal
+                  </h2>
+                  <p className="text-sm text-slate-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    Command Line Interface
+                  </p>
+                </Link>
               </div>
-              <p className="mt-4 text-lg font-bold text-red-300 md:mt-6 md:text-xl">
-                Shell
-              </p>
-            </Link>
+
+              {/* Right: Story */}
+              <div className="animate-fade-in-up delay-400">
+                <Link
+                  href="/book"
+                  className="group relative flex flex-col items-center"
+                >
+                  <div className="relative flex h-32 w-32 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-600 to-amber-900 p-1 shadow-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-amber-500/50">
+                    <div className="flex h-full w-full items-center justify-center rounded-xl bg-slate-950/50 backdrop-blur-sm">
+                      <FaBook className="h-12 w-12 text-amber-400 transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    {/* Glow */}
+                    <div className="absolute -inset-1 rounded-2xl bg-amber-500 opacity-0 blur transition-opacity duration-500 group-hover:opacity-30" />
+                  </div>
+                  <h2 className="mt-4 text-xl font-bold text-amber-300 transition-colors group-hover:text-amber-200">
+                    Story
+                  </h2>
+                  <p className="text-sm text-slate-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    Interactive Narrative
+                  </p>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
