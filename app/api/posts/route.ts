@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth';
 export async function GET() {
   await dbConnect();
   try {
-    const posts = await Post.find({}).sort({ date: -1 });
+    const posts = await Post.find({ published: true }).sort({ date: -1 });
     return NextResponse.json(posts);
   } catch (error) {
     return NextResponse.json(
