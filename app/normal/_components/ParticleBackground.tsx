@@ -2,12 +2,67 @@
 
 import { useEffect, useRef } from 'react';
 
-const ParticleBackground = () => {
-  const canvasRef = useRef(null);
+class Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  color: string;
+  opacity: number;
+  canvasWidth: number;
+  canvasHeight: number;
+
+  constructor(canvasWidth: number, canvasHeight: number, colors: string[]) {
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
+    this.x = Math.random() * canvasWidth;
+    this.y = Math.random() * canvasHeight;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = (Math.random() - 0.5) * 2;
+    this.speedY = (Math.random() - 0.5) * 2;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.opacity = Math.random() * 0.8 + 0.3;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // Bounce off edges
+    if (this.x < 0 || this.x > this.canvasWidth) this.speedX *= -1;
+    if (this.y < 0 || this.y > this.canvasHeight) this.speedY *= -1;
+
+    // Keep particles within bounds
+    this.x = Math.max(0, Math.min(this.canvasWidth, this.x));
+    this.y = Math.max(0, Math.min(this.canvasHeight, this.y));
+  }
+
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Add glow effect
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = this.color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+  }
+}
+
+export default function ParticleBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     // Set canvas size
     const resizeCanvas = () => {
@@ -19,53 +74,13 @@ const ParticleBackground = () => {
     window.addEventListener('resize', resizeCanvas);
 
     // Particle configuration
-    const particles = [];
+    const particles: Particle[] = [];
     const particleCount = 80;
     const colors = ['#22c55e', '#16a34a', '#4ade80', '#15803d', '#86efac'];
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = (Math.random() - 0.5) * 2;
-        this.speedY = (Math.random() - 0.5) * 2;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.opacity = Math.random() * 0.8 + 0.3;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        // Bounce off edges
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-
-        // Keep particles within bounds
-        this.x = Math.max(0, Math.min(canvas.width, this.x));
-        this.y = Math.max(0, Math.min(canvas.height, this.y));
-      }
-
-      draw() {
-        ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Add glow effect
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.color;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-      }
-    }
-
     // Create particles
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+      particles.push(new Particle(canvas.width, canvas.height, colors));
     }
 
     // Animation loop
@@ -74,7 +89,7 @@ const ParticleBackground = () => {
 
       particles.forEach((particle) => {
         particle.update();
-        particle.draw();
+        particle.draw(ctx);
       });
 
       // Draw connections between nearby particles
@@ -117,6 +132,4 @@ const ParticleBackground = () => {
       }}
     />
   );
-};
-
-export default ParticleBackground;
+}

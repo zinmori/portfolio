@@ -17,11 +17,22 @@ import {
   FaComments,
 } from 'react-icons/fa';
 import { VscError } from 'react-icons/vsc';
-import ConnectBtn from '../components/ConnectBtn';
+import ConnectBtn from '../ConnectBtn';
+import { IconType } from 'react-icons';
+
+interface ContactInfo {
+  icon: IconType;
+  label: string;
+  value: string;
+  href: string;
+  color: string;
+}
 
 export default function Contact() {
   const [isSending, setIsSending] = useState(false);
-  const [isSuccess, setIsSuccess] = useState('notSend');
+  const [isSuccess, setIsSuccess] = useState<'notSend' | 'yes' | 'no'>(
+    'notSend',
+  );
   const [emailIsWrong, setEmailIsWrong] = useState(false);
   const [messageIsWrong, setMessageIsWrong] = useState(false);
   const [nameIsWrong, setNameIsWrong] = useState(false);
@@ -32,11 +43,12 @@ export default function Contact() {
   });
 
   const [ref, inView] = useInView({
-    // threshold: 0.1,
     triggerOnce: true,
   });
 
-  function handleChange(e) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     // Reset error states when user starts typing
     if (e.target.name === 'email') setEmailIsWrong(false);
@@ -44,13 +56,13 @@ export default function Contact() {
     if (e.target.name === 'name') setNameIsWrong(false);
   }
 
-  function validateEmail(email) {
+  function validateEmail(email: string) {
     return email.includes('@') && email.includes('.');
   }
-  function validateMessage(message) {
+  function validateMessage(message: string) {
     return message.length > 0;
   }
-  function validateName(name) {
+  function validateName(name: string) {
     return name.length > 2;
   }
 
@@ -65,7 +77,7 @@ export default function Contact() {
     );
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsSending(true);
     if (!validateInputs()) {
@@ -77,8 +89,8 @@ export default function Contact() {
     setNameIsWrong(false);
     emailjs
       .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
           from_name: formData.name,
           to_name: 'Ezechiel',
@@ -86,7 +98,7 @@ export default function Contact() {
           to_email: 'ezechielagban1@gmail.com',
           message: formData.message,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       )
       .then(() => {
         setFormData({ name: '', email: '', message: '' });
@@ -126,7 +138,7 @@ export default function Contact() {
     },
   };
 
-  const contactInfo = [
+  const contactInfo: ContactInfo[] = [
     {
       icon: FaPhone,
       label: 'Phone',
@@ -164,7 +176,6 @@ export default function Contact() {
       >
         {/* Section header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6"
             variants={itemVariants}
@@ -179,7 +190,6 @@ export default function Contact() {
             Have a project in mind? I&apos;d love to hear about it. Let&apos;s
             discuss how we can bring your ideas to life.
           </motion.p>
-
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">

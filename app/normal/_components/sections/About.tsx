@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function About() {
   return (
-    <section id="about" className="section-padding  relative overflow-hidden">
+    <section id="about" className="section-padding relative overflow-hidden">
       <div className="section-container grid lg:grid-cols-2 gap-16 items-center">
         {/* Left side - Image */}
         <motion.div
@@ -29,7 +29,6 @@ export default function About() {
             <div className="absolute inset-2 rounded-xl bg-gradient-to-t from-dark-900/50 via-transparent to-transparent"></div>
           </div>
         </motion.div>
-        {/* </motion.div> */}
 
         {/* Right side - Content */}
         <div className="space-y-8">
@@ -58,7 +57,7 @@ export default function About() {
                 <span className="text-secondary-400 font-semibold">
                   software engineering
                 </span>{' '}
-                background , I bring a unique perspective to data science,
+                background, I bring a unique perspective to data science,
                 building robust and scalable solutions. I specialize in machine
                 learning, statistical analysis, and turning data into actionable
                 business insights.

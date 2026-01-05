@@ -254,6 +254,33 @@ export default function BookContent({
           </div>
         </Page>
 
+        {/* Interests */}
+        <Page number={pageNumber++}>
+          <div className="prose font-serif text-sm">
+            <h2 className="font-handwriting text-3xl mb-4 text-gray-800">
+              Interests
+            </h2>
+            <p className="mb-4">
+              When I&apos;m not coding, you can find me exploring these worlds:
+            </p>
+            <ul className="list-none pl-0 space-y-2">
+              {[
+                "Rubik's Cube",
+                'Chess',
+                'Reading',
+                'Drawing',
+                'Manga',
+                'Sleeping',
+              ].map((interest) => (
+                <li key={interest} className="flex items-center gap-2">
+                  <span className="text-red-800">❧</span>
+                  <span className="font-bold text-gray-700">{interest}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Page>
+
         {/* Education */}
         <Page number={pageNumber++}>
           <div className="prose font-serif">

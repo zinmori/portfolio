@@ -4,7 +4,35 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FaDesktop, FaBook } from 'react-icons/fa';
 import { HiOutlineCommandLine } from 'react-icons/hi2';
+import { IoGrid } from 'react-icons/io5';
 import { GlitchOverlay } from './GlitchOverlay';
+
+const modes = [
+  {
+    key: 'normal',
+    path: '/normal',
+    icon: FaDesktop,
+    label: 'Interface',
+    color: 'from-blue-500 to-indigo-600',
+    glow: 'shadow-blue-500/40',
+  },
+  {
+    key: 'terminal',
+    path: '/terminal',
+    icon: HiOutlineCommandLine,
+    label: 'Terminal',
+    color: 'from-emerald-500 to-green-600',
+    glow: 'shadow-emerald-500/40',
+  },
+  {
+    key: 'book',
+    path: '/book',
+    icon: FaBook,
+    label: 'Book',
+    color: 'from-amber-600 to-orange-700',
+    glow: 'shadow-amber-500/40',
+  },
+];
 
 export function ModeSwitchButton() {
   const pathname = usePathname();
@@ -12,6 +40,11 @@ export function ModeSwitchButton() {
   const [isGlitching, setIsGlitching] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [targetMode, setTargetMode] = useState('normal');
+
+  // Ne pas afficher sur la page d'accueil "Choose your experience"
+  if (pathname === '/' || pathname === '') {
+    return null;
+  }
 
   const handleSwitch = (target: string) => {
     const mode = target.replace('/', '') || 'normal';
@@ -31,66 +64,72 @@ export function ModeSwitchButton() {
     ? 'book'
     : 'normal';
 
+  const currentModeData = modes.find((m) => m.key === currentMode) || modes[0];
+  const availableModes = modes.filter((m) => m.key !== currentMode);
+
+  // Positions en arc de cercle (vers le haut-gauche)
+  const getRadialPosition = (index: number, total: number) => {
+    const startAngle = 200;
+    const endAngle = 250;
+    const angleStep = total > 1 ? (endAngle - startAngle) / (total - 1) : 0;
+    const angle = startAngle + index * angleStep;
+    const radian = (angle * Math.PI) / 180;
+    const radius = 55;
+
+    return {
+      x: Math.cos(radian) * radius,
+      y: Math.sin(radian) * radius,
+    };
+  };
+
   return (
     <>
       <GlitchOverlay active={isGlitching} targetMode={targetMode} />
 
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
-        {isOpen && (
-          <div className="flex flex-col gap-3 mb-2 animate-in slide-in-from-bottom-4 fade-in duration-200">
-            {currentMode !== 'normal' && (
-              <button
-                onClick={() => handleSwitch('/normal')}
-                className="bg-blue-600 p-3 rounded-full text-white shadow-lg hover:scale-110 transition-transform flex items-center gap-2 group"
-                title="Interface Mode"
-              >
-                <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 text-sm font-medium whitespace-nowrap">
-                  Interface
-                </span>
-                <FaDesktop size={20} />
-              </button>
-            )}
+      <div className="fixed bottom-4 right-4 z-50">
+        {/* Menu radial */}
+        <div className="relative">
+          {availableModes.map((mode, index) => {
+            const pos = getRadialPosition(index, availableModes.length);
+            const Icon = mode.icon;
 
-            {currentMode !== 'terminal' && (
+            return (
               <button
-                onClick={() => handleSwitch('/terminal')}
-                className="bg-green-700 p-3 rounded-full text-white shadow-lg hover:scale-110 transition-transform flex items-center gap-2 group"
-                title="Terminal Mode"
+                key={mode.key}
+                onClick={() => handleSwitch(mode.path)}
+                style={{
+                  transform: isOpen
+                    ? `translate(${pos.x}px, ${pos.y}px) scale(1)`
+                    : 'translate(0, 0) scale(0)',
+                  opacity: isOpen ? 1 : 0,
+                  transitionDelay: isOpen ? `${index * 50}ms` : '0ms',
+                }}
+                className={`absolute bottom-0 right-0 p-2.5 rounded-xl text-white 
+                  bg-gradient-to-br ${mode.color}
+                  shadow-md ${mode.glow}
+                  transition-all duration-300 ease-out
+                  hover:scale-110 z-50`}
+                title={mode.label}
               >
-                <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 text-sm font-medium whitespace-nowrap">
-                  Terminal
-                </span>
-                <HiOutlineCommandLine size={20} />
+                <Icon size={16} />
               </button>
-            )}
+            );
+          })}
 
-            {currentMode !== 'book' && (
-              <button
-                onClick={() => handleSwitch('/book')}
-                className="bg-[#8b4513] p-3 rounded-full text-white shadow-lg hover:scale-110 transition-transform flex items-center gap-2 group"
-                title="Book Mode"
-              >
-                <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 text-sm font-medium whitespace-nowrap">
-                  Book
-                </span>
-                <FaBook size={20} />
-              </button>
-            )}
-          </div>
-        )}
-
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`p-4 rounded-full text-white shadow-xl hover:scale-105 transition-all duration-300 ${
-            isOpen ? 'bg-red-600 rotate-45' : 'bg-gray-800'
-          }`}
-        >
-          {isOpen ? (
-            <span className="text-xl font-bold">+</span>
-          ) : (
-            <span className="text-sm font-bold">MODE</span>
-          )}
-        </button>
+          {/* Bouton principal */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`relative p-2.5 rounded-xl text-white 
+              bg-gradient-to-br ${currentModeData.color}
+              shadow-md ${currentModeData.glow}
+              border border-white/20
+              transition-all duration-300 ease-out
+              hover:scale-105
+              ${isOpen ? 'rotate-45' : ''}`}
+          >
+            <IoGrid size={18} className="relative z-10" />
+          </button>
+        </div>
       </div>
     </>
   );

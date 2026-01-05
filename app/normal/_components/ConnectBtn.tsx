@@ -2,8 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { IconType } from 'react-icons';
 
-const ConnectBtn = ({ Icon, link }) => {
+interface ConnectBtnProps {
+  Icon: IconType;
+  link: string;
+}
+
+export default function ConnectBtn({ Icon, link }: ConnectBtnProps) {
   const [isHover, setIsHover] = useState(false);
 
   return (
@@ -59,7 +65,4 @@ const ConnectBtn = ({ Icon, link }) => {
       />
     </motion.a>
   );
-};
-
-export default ConnectBtn;
-
+}

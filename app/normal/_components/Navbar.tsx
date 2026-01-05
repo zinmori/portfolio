@@ -5,6 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
+interface NavItem {
+  href: string;
+  label: string;
+  isPage?: boolean;
+}
+
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -37,7 +43,7 @@ export default function Navbar() {
     setShowMenu(!showMenu);
   };
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#experience', label: 'Experience' },
@@ -48,12 +54,12 @@ export default function Navbar() {
     { href: '/normal/blog', label: 'Blog', isPage: true },
   ];
 
-  const getHref = (item) => {
+  const getHref = (item: NavItem) => {
     if (item.isPage) return item.href;
     return isHomePage ? item.href : `/normal${item.href}`;
   };
 
-  const NavLinks = ({ mobile = false }) => (
+  const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
     <>
       {navItems.map((item, index) => (
         <Link

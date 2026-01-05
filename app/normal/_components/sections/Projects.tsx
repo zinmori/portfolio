@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -33,6 +34,24 @@ import {
   SiTensorflow,
   SiPytorch,
 } from 'react-icons/si';
+import { IconType } from 'react-icons';
+
+interface Project {
+  _id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  image?: string;
+  demoUrl?: string;
+  repoUrl?: string;
+  tags?: string[];
+}
+
+interface MappedProject extends Project {
+  imgUrl?: string;
+  projectLink?: string;
+  projectCodeLink?: string;
+}
 
 const filterOptions = [
   { label: 'All Projects', value: 'All', icon: FaCode },
@@ -43,8 +62,8 @@ const filterOptions = [
 
 export default function Projects() {
   const [selectedFilter, setSelectedFilter] = useState('All');
-  const [projects, setProjects] = useState([]);
-  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [projects, setProjects] = useState<MappedProject[]>([]);
+  const [filteredProjects, setFilteredProjects] = useState<MappedProject[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,8 +71,8 @@ export default function Projects() {
       try {
         const res = await fetch('/api/projects');
         if (res.ok) {
-          const data = await res.json();
-          const mappedData = data.map((p) => ({
+          const data: Project[] = await res.json();
+          const mappedData: MappedProject[] = data.map((p) => ({
             ...p,
             imgUrl: p.image,
             projectLink: p.demoUrl,
@@ -73,7 +92,6 @@ export default function Projects() {
   }, []);
 
   const [ref, inView] = useInView({
-    // threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -100,74 +118,47 @@ export default function Projects() {
     },
   };
 
-  const filterProjects = (filter) => {
+  const filterProjects = (filter: string) => {
     setSelectedFilter(filter);
     if (filter === 'All') {
       setFilteredProjects(projects);
     } else {
       setFilteredProjects(
-        projects.filter((project) => project.tags.includes(filter)),
+        projects.filter((project) => project.tags?.includes(filter)),
       );
     }
   };
 
-  const getTechIcon = (tech) => {
-    switch (tech.toLowerCase()) {
-      case 'react':
-        return <FaReact className="text-blue-400" />;
-      case 'next.js':
-        return <SiNextdotjs className="text-white" />;
-      case 'node.js':
-        return <FaNodeJs className="text-green-500" />;
-      case 'python':
-        return <FaPython className="text-yellow-400" />;
-      case 'flutter':
-        return <SiFlutter className="text-blue-500" />;
-      case 'mongodb':
-        return <SiMongodb className="text-green-600" />;
-      case 'tailwind css':
-        return <SiTailwindcss className="text-green-400" />;
-      case 'express':
-        return <SiExpress className="text-gray-400" />;
-      case 'dart':
-        return <SiDart className="text-blue-400" />;
-      case 'firebase':
-        return <SiFirebase className="text-yellow-400" />;
-      case 'javascript':
-        return <SiJavascript className="text-yellow-400" />;
-      case 'css':
-        return <SiCss3 className="text-blue-400" />;
-      case 'html':
-        return <SiHtml5 className="text-orange-400" />;
-      case 'sqlite':
-        return <SiSqlite className="text-gray-400" />;
-      case 'pandas':
-        return <SiPandas className="text-blue-400" />;
-      case 'numpy':
-        return <SiNumpy className="text-blue-400" />;
-      case 'plotly':
-        return <SiPlotly className="text-blue-400" />;
-      case 'ml':
-        return <FaRobot className="text-blue-400" />;
-      case 'jupyter':
-        return <SiJupyter className="text-blue-400" />;
-      case 'push notifications':
-        return <FaRocket className="text-orange-400" />;
-      case 'scikit-learn':
-        return <SiScikitlearn className="text-blue-400" />;
-      case 'matplotlib':
-        return <SiPlotly className="text-blue-400" />;
-      case 'seaborn':
-        return <SiPlotly className="text-blue-400" />;
-      case 'tensorflow':
-        return <SiTensorflow className="text-orange-400" />;
-      case 'pytorch':
-        return <SiPytorch className="text-red-600" />;
-      case 'reinforcement learning':
-        return <FaRobot className="text-blue-400" />;
-      default:
-        return <FaCode className="text-gray-400" />;
-    }
+  const getTechIcon = (tech: string): React.ReactNode => {
+    const techMap: Record<string, React.ReactNode> = {
+      react: <FaReact className="text-blue-400" />,
+      'next.js': <SiNextdotjs className="text-white" />,
+      'node.js': <FaNodeJs className="text-green-500" />,
+      python: <FaPython className="text-yellow-400" />,
+      flutter: <SiFlutter className="text-blue-500" />,
+      mongodb: <SiMongodb className="text-green-600" />,
+      'tailwind css': <SiTailwindcss className="text-green-400" />,
+      express: <SiExpress className="text-gray-400" />,
+      dart: <SiDart className="text-blue-400" />,
+      firebase: <SiFirebase className="text-yellow-400" />,
+      javascript: <SiJavascript className="text-yellow-400" />,
+      css: <SiCss3 className="text-blue-400" />,
+      html: <SiHtml5 className="text-orange-400" />,
+      sqlite: <SiSqlite className="text-gray-400" />,
+      pandas: <SiPandas className="text-blue-400" />,
+      numpy: <SiNumpy className="text-blue-400" />,
+      plotly: <SiPlotly className="text-blue-400" />,
+      ml: <FaRobot className="text-blue-400" />,
+      jupyter: <SiJupyter className="text-blue-400" />,
+      'push notifications': <FaRocket className="text-orange-400" />,
+      'scikit-learn': <SiScikitlearn className="text-blue-400" />,
+      matplotlib: <SiPlotly className="text-blue-400" />,
+      seaborn: <SiPlotly className="text-blue-400" />,
+      tensorflow: <SiTensorflow className="text-orange-400" />,
+      pytorch: <SiPytorch className="text-red-600" />,
+      'reinforcement learning': <FaRobot className="text-blue-400" />,
+    };
+    return techMap[tech.toLowerCase()] || <FaCode className="text-gray-400" />;
   };
 
   return (
@@ -237,7 +228,7 @@ export default function Projects() {
             animate="visible"
             exit="hidden"
           >
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 key={project.title}
                 variants={itemVariants}
@@ -249,88 +240,74 @@ export default function Projects() {
                   whileHover={{ y: -10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {/* Project image */}
-                  <div className="relative overflow-hidden">
-                    <motion.img
-                      src={project.imgUrl}
-                      alt={project.title}
-                      className="w-full h-64 object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    />
-
-                    {/* Featured badge */}
-                    {project.featured && (
-                      <motion.div
-                        className="absolute top-4 left-4 bg-gradient-primary px-3 py-1 rounded-full text-white text-xs font-medium flex items-center space-x-1"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                      >
-                        <FaRocket className="text-xs" />
-                        <span>Featured</span>
-                      </motion.div>
+                  {/* Project Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    {project.imgUrl && (
+                      <Image
+                        src={project.imgUrl}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
                     )}
+                    {/* <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/50 to-transparent" /> */}
 
-                    {/* Overlay on hover */}
-                    <motion.div className="absolute inset-0 bg-black/60 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {project.projectLink && (
-                        <motion.a
-                          href={project.projectLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-3 bg-white/20 rounded-full text-white hover:bg-primary-500 transition-colors"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <FaExternalLinkAlt />
-                        </motion.a>
-                      )}
+                    {/* Action buttons overlay */}
+                    <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {project.projectCodeLink && (
                         <motion.a
                           href={project.projectCodeLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-3 bg-white/20 rounded-full text-white hover:bg-primary-500 transition-colors"
+                          className="p-2 bg-dark-800/80 rounded-full text-white hover:bg-primary-500 transition-colors"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           <FaGithub />
                         </motion.a>
                       )}
-                    </motion.div>
+                      {project.projectLink && (
+                        <motion.a
+                          href={project.projectLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 bg-dark-800/80 rounded-full text-white hover:bg-primary-500 transition-colors"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaExternalLinkAlt />
+                        </motion.a>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Project content */}
+                  {/* Project Info */}
                   <div className="p-6">
-                    <h3 className="text-xl font-display font-bold text-white mb-3 line-clamp-2">
+                    <h3 className="text-xl font-display font-bold text-white mb-2">
                       {project.title}
                     </h3>
-
-                    <p className="text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">
                       {project.description}
                     </p>
 
                     {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.slice(0, 4).map((tech) => (
-                        <motion.div
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies?.slice(0, 4).map((tech) => (
+                        <div
                           key={tech}
-                          className="flex items-center space-x-1 px-2 py-1 bg-dark-700/50 rounded-full text-xs font-medium text-gray-300 border border-white/10"
-                          whileHover={{
-                            scale: 1.05,
-                            backgroundColor: project.color + '20',
-                          }}
+                          className="flex items-center space-x-1 px-2 py-1 bg-dark-700/50 rounded-full text-xs"
                         >
                           {getTechIcon(tech)}
-                          <span>{tech}</span>
-                        </motion.div>
-                      ))}
-                      {project.technologies.length > 4 && (
-                        <div className="px-2 py-1 bg-dark-700/50 rounded-full text-xs text-gray-400 border border-white/10">
-                          +{project.technologies.length - 4} more
+                          <span className="text-gray-300">{tech}</span>
                         </div>
-                      )}
+                      ))}
+                      {project.technologies &&
+                        project.technologies.length > 4 && (
+                          <span className="px-2 py-1 bg-dark-700/50 rounded-full text-xs text-gray-400">
+                            +{project.technologies.length - 4}
+                          </span>
+                        )}
                     </div>
                   </div>
                 </motion.div>

@@ -12,6 +12,7 @@ import {
   FaJava,
   FaRobot,
   FaGamepad,
+  FaServer,
 } from 'react-icons/fa';
 import {
   SiNextdotjs,
@@ -36,8 +37,22 @@ import {
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
+import { IconType } from 'react-icons';
 
-const skillsData = [
+interface Skill {
+  name: string;
+  color: string;
+  icon: IconType;
+}
+
+interface SkillCategory {
+  name: string;
+  icon: IconType;
+  color: string;
+  skills: Skill[];
+}
+
+const skillsData: SkillCategory[] = [
   {
     name: 'Data Science & AI',
     icon: FaRobot,
@@ -69,7 +84,7 @@ const skillsData = [
   },
   {
     name: 'Backend',
-    icon: FaNodeJs,
+    icon: FaServer,
     color: '#68A063',
     skills: [
       { name: 'Node.js/Express', color: '#68A063', icon: FaNodeJs },
@@ -115,9 +130,8 @@ const skillsData = [
   },
 ];
 
-const Skills = () => {
+export default function Skills() {
   const [ref, inView] = useInView({
-    // threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -146,7 +160,6 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-padding relative overflow-hidden">
-      {/* Background decorative elements */}
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -174,7 +187,7 @@ const Skills = () => {
 
         {/* Skills grid */}
         <div className="grid lg:grid-cols-2 gap-8">
-          {skillsData.map((category, categoryIndex) => (
+          {skillsData.map((category) => (
             <motion.div
               key={category.name}
               variants={categoryVariants}
@@ -197,7 +210,6 @@ const Skills = () => {
                   <h3 className="text-2xl font-display font-bold text-white">
                     {category.name}
                   </h3>
-                  {/* <p className="text-gray-400 font-mono text-sm">Development</p> */}
                 </div>
               </div>
 
@@ -206,13 +218,13 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      delay: 0.2 + categoryIndex * 0.1 + skillIndex * 0.05,
+                    className="flex items-center space-x-3 p-3 rounded-lg bg-white/5"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: `${skill.color}20`,
+                      borderColor: `${skill.color}40`,
                     }}
-                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
                   >
                     {skill.icon && (
                       <skill.icon
@@ -232,6 +244,4 @@ const Skills = () => {
       </motion.div>
     </section>
   );
-};
-
-export default Skills;
+}

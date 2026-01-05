@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import Navbar from '../../src/components/Navbar';
-import ParticleBackground from '../../src/components/ParticleBackground';
-import Loader from '../../src/components/Loader';
+import Navbar from './_components/Navbar';
+import ParticleBackground from './_components/ParticleBackground';
+import Loader from './_components/Loader';
 import {
   Home,
   About,
@@ -15,7 +15,8 @@ import {
   Education,
   Experience,
   Certifications,
-} from '../../src/sections';
+  Interests,
+} from './_components/sections';
 
 export default function NormalPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -79,6 +80,7 @@ export default function NormalPage() {
               <Certifications />
               <Education />
               <Projects />
+              <Interests />
               <Contact />
             </main>
           </motion.div>

@@ -1,5 +1,5 @@
-import Navbar from '../../../src/components/Navbar';
-import ParticleBackground from '../../../src/components/ParticleBackground';
+import Navbar from '../_components/Navbar';
+import ParticleBackground from '../_components/ParticleBackground';
 import BlogList from './_components/BlogList';
 
 export default function BlogPage() {

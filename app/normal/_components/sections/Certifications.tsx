@@ -11,8 +11,20 @@ import {
   FaGraduationCap,
 } from 'react-icons/fa';
 
-const Certifications = () => {
-  const [certificates, setCertificates] = useState([]);
+interface Certificate {
+  _id: string;
+  title: string;
+  institution: string;
+  date: string;
+  link?: string;
+  image: string;
+  color?: string;
+  category?: string;
+  skills?: string[];
+}
+
+export default function Certifications() {
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,7 +45,7 @@ const Certifications = () => {
     fetchCertificates();
   }, []);
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -163,75 +175,65 @@ const Certifications = () => {
                 </div>
 
                 {/* Category badge */}
-                <motion.div
-                  className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-4"
-                  style={{
-                    backgroundColor: `${certificate.color}20`,
-                    color: certificate.color,
-                    border: `1px solid ${certificate.color}40`,
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {certificate.category}
-                </motion.div>
+                {certificate.category && (
+                  <motion.div
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-4"
+                    style={{
+                      backgroundColor: `${certificate.color || '#22c55e'}20`,
+                      color: certificate.color || '#22c55e',
+                      border: `1px solid ${certificate.color || '#22c55e'}40`,
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {certificate.category}
+                  </motion.div>
+                )}
 
                 {/* Skills tags */}
-                <div className="mb-6">
-                  <p className="text-gray-400 text-sm mb-3 font-medium">
-                    Skills acquired:
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {certificate.skills.map((skill, skillIndex) => (
-                      <motion.span
-                        key={skill}
-                        className="px-3 py-1 bg-dark-700 text-white text-xs rounded-full border border-white/10"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={inView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{
-                          delay: 0.5 + index * 0.1 + skillIndex * 0.05,
-                        }}
-                        whileHover={{
-                          scale: 1.1,
-                          backgroundColor: certificate.color + '20',
-                        }}
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
+                {certificate.skills && certificate.skills.length > 0 && (
+                  <div className="mb-6">
+                    <p className="text-gray-400 text-sm mb-3 font-medium">
+                      Skills acquired:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {certificate.skills.map((skill, skillIndex) => (
+                        <motion.span
+                          key={skill}
+                          className="px-3 py-1 bg-dark-700 text-white text-xs rounded-full border border-white/10"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={inView ? { opacity: 1, scale: 1 } : {}}
+                          transition={{
+                            delay: 0.5 + index * 0.1 + skillIndex * 0.05,
+                          }}
+                          whileHover={{
+                            scale: 1.1,
+                            backgroundColor: `${
+                              certificate.color || '#22c55e'
+                            }20`,
+                          }}
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Action button */}
-                <motion.a
-                  href={certificate.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-primary-400 hover:text-primary-300 font-medium group/link transition-colors"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span>View Certificate</span>
-                  <motion.div
-                    className="group-hover/link:translate-x-1 transition-transform"
-                    whileHover={{ rotate: 45 }}
+                {/* View Certificate Link */}
+                {certificate.link && (
+                  <motion.a
+                    href={certificate.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 text-primary-400 hover:text-primary-300 transition-colors"
+                    whileHover={{ x: 5 }}
                   >
-                    <FaExternalLinkAlt className="text-sm" />
-                  </motion.div>
-                </motion.a>
-
-                {/* Decorative corner */}
-                <motion.div
-                  className="absolute top-4 right-4 w-12 h-12 opacity-10"
-                  style={{ color: certificate.color }}
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                >
-                  <FaAward className="w-full h-full" />
-                </motion.div>
+                    <span className="text-sm font-medium">
+                      View Certificate
+                    </span>
+                    <FaExternalLinkAlt className="text-xs" />
+                  </motion.a>
+                )}
               </motion.div>
             </motion.div>
           ))}
@@ -239,6 +241,4 @@ const Certifications = () => {
       </motion.div>
     </section>
   );
-};
-
-export default Certifications;
+}

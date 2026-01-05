@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-const Loader = () => {
+export default function Loader() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-dark">
       <div className="relative">
@@ -65,6 +65,4 @@ const Loader = () => {
       </motion.div>
     </div>
   );
-};
-
-export default Loader;
+}

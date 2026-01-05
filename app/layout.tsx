@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
-import '../src/index.css';
+import './index.css';
 import { ModeSwitchButton } from './components/ModeSwitchButton';
 
 const inter = Inter({

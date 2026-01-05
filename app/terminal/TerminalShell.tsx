@@ -33,6 +33,7 @@ type CommandDefinition = {
 const commandDefinitions: readonly CommandDefinition[] = [
   { name: 'about', description: 'Display profile overview' },
   { name: 'contact', description: 'Show contact information' },
+  { name: 'interests', description: 'List personal interests' },
   { name: 'help', description: 'List available commands' },
   { name: 'ls', description: 'List directory contents', usage: 'ls [dir]' },
   { name: 'cd', description: 'Change directory', usage: 'cd <dir>' },
@@ -237,6 +238,28 @@ export function TerminalShell() {
     pushOutput(
       'Email   : ezechielagban1@gmail.com\nPhone   : +228 91 35 59 86\nLocation: Lome, Togo\nWebsite : https://ezechiel.bigz.dev',
       { pre: true, className: 'terminal-text' },
+    );
+  }, [pushOutput]);
+
+  const handleInterests = useCallback(() => {
+    pushOutput(
+      <div className="terminal-section">
+        <p className="terminal-heading">Interests</p>
+        <ul className="terminal-list">
+          {[
+            "Rubik's Cube",
+            'Chess',
+            'Reading',
+            'Drawing',
+            'Manga',
+            'Sleeping',
+          ].map((interest) => (
+            <li key={interest} className="terminal-list__item">
+              - {interest}
+            </li>
+          ))}
+        </ul>
+      </div>,
     );
   }, [pushOutput]);
 
@@ -701,6 +724,9 @@ export function TerminalShell() {
         case 'contact':
           handleContact();
           break;
+        case 'interests':
+          handleInterests();
+          break;
         case 'ls':
           handleLs(args, cwd);
           break;
@@ -756,6 +782,7 @@ export function TerminalShell() {
       handleClear,
       handleColor,
       handleContact,
+      handleInterests,
       handleCredits,
       handleEcho,
       handleExit,

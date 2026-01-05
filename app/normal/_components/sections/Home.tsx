@@ -3,12 +3,11 @@
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import ConnectBtn from '../components/ConnectBtn';
+import ConnectBtn from '../ConnectBtn';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 
 export default function Home() {
   const [ref, inView] = useInView({
-    // threshold: 0.1,
     triggerOnce: true,
   });
 
