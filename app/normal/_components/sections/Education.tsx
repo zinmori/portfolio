@@ -217,12 +217,6 @@ const Education = () => {
                           <motion.div
                             className="w-2 h-2 rounded-full"
                             style={{ backgroundColor: edu.color }}
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              delay: highlightIndex * 0.3,
-                            }}
                           />
                           <span className="text-sm text-gray-300 font-medium">
                             {highlight}

@@ -25,7 +25,6 @@ interface ContactInfo {
   label: string;
   value: string;
   href: string;
-  color: string;
 }
 
 export default function Contact() {
@@ -144,21 +143,18 @@ export default function Contact() {
       label: 'Phone',
       value: '+228 91 35 59 86',
       href: 'tel:+22891355986',
-      color: '#22c55e',
     },
     {
       icon: FaEnvelope,
       label: 'Email',
       value: 'ezechielagban1@gmail.com',
       href: 'mailto:ezechielagban1@gmail.com',
-      color: '#16a34a',
     },
     {
       icon: FaMapMarkerAlt,
       label: 'Location',
       value: 'Lomé, Togo',
       href: 'https://maps.google.com/?q=Lome,Togo',
-      color: '#4ade80',
     },
   ];
 
@@ -436,15 +432,11 @@ export default function Contact() {
                   <div className="glass-effect rounded-xl p-6 border border-white/10 card-hover">
                     <div className="flex items-center space-x-4">
                       <motion.div
-                        className="p-3 rounded-full"
-                        style={{ backgroundColor: `${info.color}20` }}
+                        className="p-3 rounded-full bg-primary-200"
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <info.icon
-                          className="text-xl"
-                          style={{ color: info.color }}
-                        />
+                        <info.icon className="text-xl text-primary-800" />
                       </motion.div>
                       <div>
                         <p className="text-gray-400 text-sm font-medium mb-1">
