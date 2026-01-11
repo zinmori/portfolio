@@ -63,7 +63,7 @@ export default function BlogList() {
               key={post._id}
               className="group"
             >
-              <article className="h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-green-500/50 transition-all duration-300 hover:-translate-y-2">
+              <article className="h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary-500/50 transition-all duration-300 hover:-translate-y-2">
                 {post.coverImage && (
                   <div className="relative h-48 overflow-hidden">
                     <Image
@@ -79,13 +79,13 @@ export default function BlogList() {
                     {post.tags?.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-medium px-2.5 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-900/50"
+                        className="text-xs font-medium px-2.5 py-0.5 rounded bg-primary-900/30 text-primary-400 border border-primary-900/50"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h2 className="text-xl font-bold mb-2 group-hover:text-green-400 transition-colors">
+                  <h2 className="text-xl font-bold mb-2 group-hover:text-primary-400 transition-colors">
                     {post.title}
                   </h2>
                   <p className="text-gray-400 text-sm mb-4 line-clamp-3">

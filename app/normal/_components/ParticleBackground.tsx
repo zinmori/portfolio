@@ -135,7 +135,7 @@ export default function ParticleBackground() {
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none"
       style={{
-        background: 'transparent',
+        background: '#000',
         zIndex: 1,
       }}
     />

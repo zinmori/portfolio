@@ -52,7 +52,7 @@ export default async function PostPage({
       <main className="relative z-20 pt-32 px-6 max-w-4xl mx-auto pb-20">
         <Link
           href="/normal/blog"
-          className="inline-flex items-center text-green-400 hover:text-green-300 mb-8 transition-colors"
+          className="inline-flex items-center text-primary-400 hover:text-primary-300 mb-8 transition-colors"
         >
           ← Back to blog
         </Link>
@@ -63,13 +63,13 @@ export default async function PostPage({
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-sm font-medium px-3 py-1 rounded-full bg-green-900/30 text-green-400 border border-green-900/50"
+                  className="text-sm font-medium px-3 py-1 rounded-full bg-primary-900/30 text-primary-400 border border-primary-900/50"
                 >
                   {tag}
                 </span>
               ))}
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-400 to-blue-500 bg-clip-text text-transparent">
               {post.title}
             </h1>
             <div className="flex items-center justify-center gap-4 text-gray-400 text-sm">
@@ -94,7 +94,7 @@ export default async function PostPage({
             </div>
           )}
 
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-green-400 hover:prose-a:text-green-300 prose-strong:text-white prose-code:text-green-300">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-primary-400 hover:prose-a:text-primary-300 prose-strong:text-white prose-code:text-primary-300">
             <MDXRemote source={post.content} />
           </div>
 

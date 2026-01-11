@@ -4,7 +4,16 @@ import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ConnectBtn from '../ConnectBtn';
-import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaLinkedin,
+  FaWhatsapp,
+  FaCode,
+  FaDatabase,
+  FaPython,
+  FaReact,
+} from 'react-icons/fa';
+import { SiTensorflow, SiJavascript } from 'react-icons/si';
 
 export default function Home() {
   const [ref, inView] = useInView({
@@ -40,7 +49,7 @@ export default function Home() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-green-900/10 to-emerald-900/10"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-green-900/10 to-emerald-900/10"></div> */}
 
       <motion.div
         ref={ref}
@@ -164,23 +173,19 @@ export default function Home() {
                 className="absolute -inset-4 rounded-full border-2 border-primary-500/30"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              />
+              >
+                {/* Decorative elements on the first ring */}
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-primary-500 rounded-full shadow-lg shadow-primary-500/50" />
+              </motion.div>
 
               {/* Second decorative ring */}
-              <motion.div
-                className="absolute -inset-8 rounded-full border border-secondary-500/20"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-              />
-
-              {/* Glow effect */}
-              <div className="absolute -inset-6 bg-gradient-primary/20 rounded-full blur-2xl"></div>
+              <div className="absolute -inset-8 rounded-full border border-primary-500/20"></div>
 
               {/* Profile image */}
               <motion.img
                 src={'/images/profil.jpg'}
                 alt="Ezechiel Kokou AGBAN"
-                className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-white/10 shadow-2xl"
+                className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-dark-900 shadow-2xl"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
